@@ -11,7 +11,7 @@ export default function Cart({ showCart, closeCart }) {
     //if(!showCart) return;
 
     return (
-        <Modal open={showCart} sx={{ zIndex: 98 }}>
+        <Modal open={showCart} onClose={closeCart} sx={{ zIndex: 98 }}>
             <Slide direction='left' in={showCart} mountOnEnter unmountOnExit>
                 <Box
                     width={{ xs: 'calc(100% - 3rem)', sm: '50%', lg: '30%' }}
@@ -32,7 +32,7 @@ export default function Cart({ showCart, closeCart }) {
 
                         {}
 
-                        <Link to='/checkout' onClick={() => closeCart()}>Checkout</Link>
+                        <Link to='/checkout' onClick={closeCart}>Checkout</Link>
                     </Stack>
                 </Box>
             </Slide>

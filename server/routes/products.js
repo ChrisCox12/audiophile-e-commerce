@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/' , getAllProducts);
-router.get('/:slug', getProductBySlug);
+router.get('/product/:slug', getProductBySlug);
 router.get('/category/:category', getProductsByCategory);
 
 router.post('/', createProduct);

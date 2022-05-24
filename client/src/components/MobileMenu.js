@@ -12,9 +12,17 @@ export default function MobileMenu({ showMenu, closeMenu }) {
     //if(!showMenu) return;
 
     return (
-        <Modal open={showMenu} sx={{ zIndex: 99 }}>
+        <Modal open={showMenu} onClose={closeMenu} sx={{ zIndex: 99 }}>
             <Slide direction='right' in={showMenu} mountOnEnter unmountOnExit>
-                <Box sx={{ position: 'absolute', top: { xs: '5.5rem', lg: '6rem' }, left: 0, width: '100%', bgcolor: 'white'}}>
+                <Box 
+                    sx={{ 
+                        position: 'absolute', 
+                        top: { xs: '5.5rem', lg: '6rem' }, 
+                        left: 0, 
+                        width: '100%', 
+                        bgcolor: 'white' 
+                    }}
+                >
                     <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ padding: '2rem 1.5rem', bgcolor: 'black' }}>
                         <Card className={styles.menuCard} elevation={0} >
                             <CardMedia>
@@ -24,7 +32,7 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>HEADPHONES</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/headphones' onClick={() => closeMenu()}>SHOP</Link>
+                                <Link to='/category/headphones' onClick={closeMenu}>SHOP</Link>
                                 <KeyboardArrowRightIcon />
                             </CardActions>
                         </Card>
@@ -37,7 +45,7 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>SPEAKERS</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/speakers' onClick={() => closeMenu()}>SHOP</Link>
+                                <Link to='/category/speakers' onClick={closeMenu}>SHOP</Link>
                                 <KeyboardArrowRightIcon />
                             </CardActions>
                         </Card>
@@ -50,7 +58,7 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>EARPHONES</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/earphones' onClick={() => closeMenu()}>SHOP</Link>
+                                <Link to='/category/earphones' onClick={closeMenu}>SHOP</Link>
                                 <KeyboardArrowRightIcon />
                             </CardActions>
                         </Card>

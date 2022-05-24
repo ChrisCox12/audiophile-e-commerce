@@ -6,10 +6,10 @@ import Navbar from "./Navbar";
 
 export default function Layout() {
     return (
-        <Box>
+        <div>
             <Navbar />
             <Outlet />
             <Footer />
-        </Box>
+        </div>
     )
 }

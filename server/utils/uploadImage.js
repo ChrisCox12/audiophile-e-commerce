@@ -1,4 +1,5 @@
-import cloudinary from "./cloudinary";
+import cloudinary from "./cloudinary.js";
+
 
 async function uploadImage(fileString) {
     try {
@@ -15,5 +16,6 @@ async function uploadImage(fileString) {
         console.log(error);
     }
 }
+
 
 export default uploadImage;

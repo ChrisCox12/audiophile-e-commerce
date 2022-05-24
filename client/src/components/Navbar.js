@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AppBar, Grid, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Stack } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import Cart from "./Cart";
 import MobileMenu from "./MobileMenu";
 
 import logo from '../assets/audiophile 2.svg';
+import styles from '../styles/Style.module.css';
 
 
 export default function Navbar() {
@@ -26,7 +27,16 @@ export default function Navbar() {
 
     return (
         <AppBar className='navbar' position='static' sx={{ height: { xs: '5.5rem', lg: '6rem' } }}>
-            <Toolbar sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: { xs: 'space-between', sm: 'auto', md: 'space-between' }, bgcolor: 'black', zIndex: 100 }}>
+            <Toolbar 
+                sx={{ 
+                    height: '100%', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: { xs: 'space-between', sm: 'auto', md: 'space-between' }, 
+                    bgcolor: 'black', 
+                    zIndex: 100 
+                }}
+            >
                 <IconButton sx={{ display: { md: 'none' }, marginRight: { sm: '2rem' } }} onClick={() => setShowMobileMenu(!showMobileMenu)}>
                     <MenuIcon sx={{ color: 'white' }} />
                 </IconButton>
@@ -35,20 +45,12 @@ export default function Navbar() {
                     <img src={logo} alt='logo' />
                 </Link>
 
-                <Grid container display={{ xs: 'none', md: 'flex' }} width='fit-content' spacing={2}>
-                    <Grid item>
-                        <Link to='/'>HOME</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link to='/headphones'>HEADPHONES</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link to='/speakers'>SPEAKERS</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link to='earphones'>EARPHONES</Link>
-                    </Grid>
-                </Grid>
+                <Stack className={styles.navlinks} spacing={2} direction='row' display={{ xs: 'none', md: 'flex' }}>
+                    <Link to='/'>HOME</Link>
+                    <Link to='/category/headphones'>HEADPHONES</Link>
+                    <Link to='/category/speakers'>SPEAKERS</Link>
+                    <Link to='/category/earphones'>EARPHONES</Link>
+                </Stack>
 
                 <IconButton sx={{ marginLeft: { sm: 'auto', md: '0' } }} onClick={() => setShowCart(!showCart)}>
                     <ShoppingCartOutlinedIcon sx={{ color: 'white' }} />

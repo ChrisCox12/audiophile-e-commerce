@@ -1,4 +1,4 @@
-import Product from "../models/product";
+import Product from "../models/product.js";
 import uploadImage from "../utils/uploadImage.js";
 
 
@@ -11,7 +11,7 @@ export async function getAllProducts(req, res) {
         res.json({ success: true, msg: 'Successfully retrieved products', products: products });
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to retrieve products' });    
     }
 }
@@ -27,7 +27,7 @@ export async function getProductsByCategory(req, res) {
         res.json({ success: true, msg: 'Successfully retrieved products by category', products: products });
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to retrieve products' });  
     }
 }
@@ -36,14 +36,14 @@ export async function getProductBySlug(req, res) {
     const { slug } = req.params;
 
     try {
-        const product = await Product.find({ slug: slug });
+        const product = await Product.findOne({ slug: slug });
 
         if(!product) return res.json({ success: false, msg: 'Could not find that product' });
 
         res.json({ success: true, msg: 'Successfully retrieved product', product: product });
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to retrieve product' });
     }
 }
@@ -54,7 +54,7 @@ export async function createProduct(req, res) {
     const galleryImages = productInfo.gallery;
     
     try {
-        const productImage = uploadImage(image);
+        /* const productImage = uploadImage(image);
         const galleryImageFirst = uploadImage(galleryImages.first);
         const galleryImageSecond = uploadImage(galleryImages.second);
         const galleryImageThird = uploadImage(galleryImages.third);
@@ -74,16 +74,18 @@ export async function createProduct(req, res) {
                 second: imageResponses[2],
                 third: imageResponses[3]
             } 
-        };
+        }; */
 
-        const product = new Product(toSave);
+        //const product = new Product(toSave);
+        const product = new Product(req.body);
 
         await product.save();
 
+        console.log(`Creating product: \n ${product}`);
         res.json({ success: true, msg: 'Successfully created product', product: product });
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to create product' });
     }
 }
@@ -99,7 +101,7 @@ export async function updateProduct(req, res) {
         await Product.findByIdAndUpdate(id, req.body);
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to update product' });
     }
 }
@@ -117,7 +119,7 @@ export async function deleteProduct(req, res) {
         res.json({ success: true, msg: 'Successfully deleted product' });
     } 
     catch(error) {
-        console.log(err);
+        console.log(error);
         res.json({ success: false, msg: 'Failed to delete product' });
     }
 }

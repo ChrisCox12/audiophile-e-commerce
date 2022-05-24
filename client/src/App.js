@@ -12,6 +12,7 @@ import ProductPage from "./pages/Product";
 import SpeakersPage from "./pages/Speakers";
 import AdminDashboardPage from './pages/AdminDashboard';
 import AdminLoginPage from './pages/AdminLogin';
+import CategoryPage from './pages/Category';
 import theme from './styles/theme';
 import Layout from './components/Layout';
 
@@ -26,9 +27,7 @@ function App() {
                     <Route element={<Layout />}>
                         <Route index element={<HomePage />} />
                         <Route path='home' element={<HomePage />} />
-                        <Route path='earphones' element={<EarphonesPage />} />
-                        <Route path='headphones' element={<HeadphonesPage />} />
-                        <Route path='speakers' element={<SpeakersPage />} />
+                        <Route path='category/:category' element={<CategoryPage />} />
                         <Route path='product/:slug' element={<ProductPage />} />
                         <Route path='checkout' element={<CheckoutPage />} />
                     </Route>

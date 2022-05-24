@@ -9,7 +9,60 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: hsl(0, 0%, 95%);
+    background-color: hsl(0, 0%, 95%) !important;
     border-radius: 7px;
     width: 100%;
-  }
+}
+
+.categoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F1F1F1 !important;
+    border-radius: 7px;
+    width: 100%;
+}
+
+.categoryCard a {
+    text-decoration: none;
+    color: black;
+    opacity: 0.5;
+    font-weight: 700;
+}
+
+.navlinks a,
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.footer-container p {
+    color: white;
+    opacity: 0.6;
+    font-weight: 500;
+}
+
+
+.showcase-a {
+    background-color: #D87D4A;
+    color: white;
+}
+
+.showcase-a-img {
+    background: url(../assets/home/image-speaker-zx9.png) no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+}
+
+.showcase-a a {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.showcase-b {
+    background: url(../assets/home/image-speaker-zx7.jpg) no-repeat center;
+    background-size: cover;
+    height: 10rem;
+}
