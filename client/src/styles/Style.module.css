@@ -30,6 +30,11 @@
     font-weight: 700;
 }
 
+.categoryCard a:hover {
+    color: #D87D4A;
+    opacity: 1;
+}
+
 .navlinks a,
 .footer-links a {
     color: white;
@@ -130,8 +135,65 @@
 .about-us-img {
     background: url(../assets/home/image-best-gear.jpg) no-repeat center;
     background-size: cover;
+    height: 100%;
+    width: 100%;
 }
 
-.about-us p {
+.about-us-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.about-us-text p {
     opacity: 0.6;
+}
+
+
+/*  
+    ***********************
+        CATEGORY PAGE
+    ***********************  
+*/
+
+.category-page-category {
+    color: white;
+    background-color: black;
+    font-weight: 700 !important;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-top: 1px solid white;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F1F1F1;
+    border-radius: 7px;
+}
+
+.product-name {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.product-description {
+    opacity: 0.6;
+}
+
+.product-info a {
+    text-decoration: none;
+    background-color: #D87D4A;
+    color: white;
+    padding: 1rem 2rem;
+    display: inline-block;
+}
+
+.product-info a:hover {
+    background-color: #FBAF85;
 }

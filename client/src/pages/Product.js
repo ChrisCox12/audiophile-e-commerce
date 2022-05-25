@@ -6,11 +6,11 @@ import { useGetProductQuery } from '../redux/productApi';
 
 export default function ProductPage() {
     const { slug } = useParams();
-    //const { data: product, isFetching } = useGetProductQuery(slug);
+    const { data, isFetching } = useGetProductQuery(slug);
+    //console.log(data)
 
 
-
-    //if(isFetching) return <Typography>Loading...</Typography>;
+    if(isFetching) return <Typography>Loading...</Typography>;
 
     return (
         <div>
