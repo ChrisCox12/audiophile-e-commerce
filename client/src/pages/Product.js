@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import { useGetProductQuery } from '../redux/productApi';
@@ -13,6 +13,9 @@ export default function ProductPage() {
     //if(isFetching) return <Typography>Loading...</Typography>;
 
     return (
-        <div>Product Page</div>
+        <div>
+            Product Page
+            
+        </div>
     )
 }

@@ -12,7 +12,6 @@ import styles from '../styles/Style.module.css';
 
 export default function CategoryCards() {
 
-
     return (
         <Box 
             className='category-cards-container' 
@@ -23,7 +22,7 @@ export default function CategoryCards() {
             gap={{ xs: '1rem', xl: '1.5rem' }} 
             marginBottom={{ xs: '7.5rem', md: '6rem', xl: '10rem' }}
         >
-            <Card className={styles.categoryCard} elevation={0}>
+            <Card className={styles.categoryCard} elevation={0} sx={{ padding: { xs: '1.5rem 0', md: '2rem 0' } }}>
                 <CardMedia>
                     <img src={HeadphonesPreview} alt='' />
                 </CardMedia>
@@ -36,7 +35,7 @@ export default function CategoryCards() {
                 </CardActions>
             </Card>
 
-            <Card className={styles.categoryCard} elevation={0}>
+            <Card className={styles.categoryCard} elevation={0} sx={{ padding: { xs: '1.5rem 0', md: '2rem 0' } }}>
                 <CardMedia>
                     <img src={SpeakersPreview} alt='' />
                 </CardMedia>
@@ -49,7 +48,7 @@ export default function CategoryCards() {
                 </CardActions>
             </Card>
 
-            <Card className={styles.categoryCard} elevation={0}>
+            <Card className={styles.categoryCard} elevation={0} sx={{ padding: { xs: '1.5rem 0', md: '2rem 0' } }}>
                 <CardMedia>
                     <img src={EarphonesPreview} alt='' />
                 </CardMedia>
@@ -62,5 +61,5 @@ export default function CategoryCards() {
                 </CardActions>
             </Card>
         </Box>
-    )
+    );
 }

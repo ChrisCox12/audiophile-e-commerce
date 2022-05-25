@@ -44,6 +44,18 @@
 }
 
 
+/*  
+    ***********************
+        HOME PAGE
+    ***********************  
+*/
+
+.showcase-a,
+.showcase-b,
+.showcase-c > * {
+    border-radius: 7px;
+}
+
 .showcase-a {
     background-color: #D87D4A;
     color: white;
@@ -59,10 +71,67 @@
     background-color: black;
     color: white;
     text-decoration: none;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    display: inline-block;
+}
+
+.showcase-a a:hover {
+    background-color: #4C4C4C;
 }
 
 .showcase-b {
     background: url(../assets/home/image-speaker-zx7.jpg) no-repeat center;
     background-size: cover;
-    height: 10rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.showcase-b a,
+.showcase-c a {
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    color: black;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.showcase-b a:hover,
+.showcase-c a:hover {
+    background-color: black;
+    color: white;
+}
+
+.showcase-c-img {
+    background: url(../assets/home/image-earphones-yx1.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.showcase-c-link-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    background-color: #F1F1F1;
+    height: 100%;
+    width: 100%;
+}
+
+
+/*  
+    ***********************
+        ABOUT US
+    ***********************  
+*/
+
+.about-us-img {
+    background: url(../assets/home/image-best-gear.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.about-us p {
+    opacity: 0.6;
 }

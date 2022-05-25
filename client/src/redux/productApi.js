@@ -12,10 +12,10 @@ export const productApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     endpoints: (builder) => ({
         getProductsByCategory: builder.query({
-            query: (category) => createRequest(`/category/${category}`)
+            query: (category) => createRequest(`/products/category/${category}`)
         }),
         getProduct: builder.query({
-            query: (slug) => createRequest(`/product/${slug}`)
+            query: (slug) => createRequest(`/products/product/${slug}`)
         })
     })
 });
