@@ -19,11 +19,12 @@ export default function CategoryPage() {
     if(isFetching) return <Typography>Loading...</Typography>;
 
     return (
-        <div>
-            <Box className='category-page'>
-                <Typography className={styles['category-page-category']} component='h1' variant='h3' padding={{ xs: '2rem 0', md: '6rem 0' }}>{category}</Typography>
+        <div className={styles['page-container']}>
+            <Typography className={styles['category-page-category']} component='h1' variant='h3' padding={{ xs: '2rem 0', md: '6rem 0' }} width='100%'>{category}</Typography>
+            <Box className='category-page' maxWidth='70rem'>
+                
 
-                <Box className='category-page-content' padding={{ xs: '4rem 1.5rem', md: '7.5rem 2.5rem', xl: '10rem' }}>
+                <Box className='category-page-content' padding={{ xs: '4rem 1.5rem', md: '7.5rem 2.5rem', xl: '10rem 0' }}>
                     {data?.products?.map((product, index) => (
                         <Box 
                             className='product' 
@@ -37,9 +38,11 @@ export default function CategoryPage() {
                             <Box 
                                 className={styles['product-image']} 
                                 marginBottom={{ xs: '2rem', md: '3.5rem', xl: '0' }} 
-                                padding={{ xs: '1rem 0', md: '1.5rem 0', xl: '2rem 3rem' }}
+                                /* padding={{ xs: '1rem 0', md: '1.5rem 0', xl: '2rem 3rem' }} */
+                                minWidth={{ xl: '34rem' }}
+                                minHeight={{ xs: '22rem', xl: '35rem' }}
                             >
-                                <AdvancedImage cldImg={cld.image(product.image)} />
+                                <AdvancedImage className='product-image' cldImg={cld.image(product.image)} />
                             </Box>
 
                             <Box className={styles['product-info']} textAlign={{ xs: 'center', xl: 'left' }}>

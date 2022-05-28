@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema({
                 type: Number,
                 default: 1
             },
-            name: String
+            item: String
         }
     ],
     gallery: {
