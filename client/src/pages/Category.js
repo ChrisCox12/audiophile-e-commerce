@@ -46,7 +46,7 @@ export default function CategoryPage() {
                             </Box>
 
                             <Box className={styles['product-info']} textAlign={{ xs: 'center', xl: 'left' }}>
-                                {product.new && <Typography color='orange.primary' letterSpacing='10px' marginBottom={{ xs: '1.5rem', md: '1rem' }}>NEW PRODUCT</Typography>}
+                                {product.new && <Typography className={styles['new-product']} marginBottom={{ xs: '1.5rem', md: '1rem' }}>NEW PRODUCT</Typography>}
                                 
                                 <Typography className={styles['product-name']} component='h2' variant='h4' marginBottom={{ xs: '1.5rem', md: '2rem' }}>{product.name}</Typography>
                                 <Typography className={styles['product-description']} marginBottom={{ xs: '1.5rem', xl: '2.5rem' }}>{product.description}</Typography>

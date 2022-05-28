@@ -2,6 +2,7 @@
 
 .removeAllButton {
     color: black !important;
+    text-decoration: underline !important;
     opacity: 0.6;    
 }
 
@@ -46,6 +47,33 @@
     color: white;
     opacity: 0.6;
     font-weight: 500;
+}
+
+.new-product {
+    color: #D87D4A;
+    letter-spacing: 10px;
+}
+
+.back-button {
+    text-decoration: none;
+    color: black;
+}
+
+.sub-text {
+    color: black;
+    opacity: 0.6;
+    font-weight: 500;
+}
+
+.item-quantity-update-box {
+    display: flex;
+    align-items: center;
+    background-color: #F1F1F1;
+    font-weight: 700;
+}
+
+.item-quantity-update-box button:hover {
+    color: #D87D4A;
 }
 
 
@@ -204,6 +232,7 @@
         PRODUCT PAGE
     ***********************  
 */
+
 .gallery-image {
     width: 100%;
     height: 100%;

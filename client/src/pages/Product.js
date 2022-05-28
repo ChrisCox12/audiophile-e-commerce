@@ -7,6 +7,8 @@ import cld from '../utils/cld';
 import CategoryCards from '../components/CategoryCards';
 import AboutUs from '../components/AboutUs';
 import { useGetProductQuery } from '../redux/productApi';
+import { addItem } from '../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 import styles from '../styles/Style.module.css';
 
 
@@ -16,6 +18,7 @@ export default function ProductPage() {
     const { slug } = useParams();
     const { data, isFetching } = useGetProductQuery(slug);
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
     console.log(data)
 
     function updateQuantity(option) {
@@ -32,7 +35,15 @@ export default function ProductPage() {
     }
 
     function addToCart() {
-
+        dispatch( 
+            addItem({ 
+                name: data.product.name, 
+                slug: data.product.slug,
+                price: data.product.price, 
+                image: data.product.image, 
+                quantity: quantity 
+            }) 
+        );
     }
 
     if(isFetching) return <Typography>Loading...</Typography>;
@@ -40,7 +51,7 @@ export default function ProductPage() {
     return (
         <div className={styles['page-container']}>
             <Box className='product-page' padding={{ xs: '1rem 1.5rem 7.5rem', md: '2rem 2.5rem 7.5rem', xl: '5rem 0 10rem' }} maxWidth='70rem'>
-                <Link to='/'>Go Back</Link>
+                <Link className={styles['back-button']} to='/'>Go Back</Link>
 
                 <Box 
                     className='product-upper' 
@@ -53,17 +64,17 @@ export default function ProductPage() {
                         <AdvancedImage cldImg={cld.image(data.product.image)} />
                     </Box>
 
-                    <Box>
-                        {data.product.new && <Typography color='orange.primary' letterSpacing='10px'>NEW PRODUCT</Typography>}
+                    <div>
+                        {data.product.new && <Typography className={styles['new-product']} marginBottom={{ xs: '1.5rem', md: '1rem' }}>NEW PRODUCT</Typography>}
                         
                         <Typography component='h1' variant='h3' fontWeight={700} textTransform='uppercase' marginBottom={{ xs: '1.5rem', md: '2rem' }}>{data.product.name}</Typography>
-                        <Typography marginBottom={{ xs: '1.5rem', md: '2rem' }}>{data.product.description}</Typography>
+                        <Typography className={styles['sub-text']} marginBottom={{ xs: '1.5rem', md: '2rem' }}>{data.product.description}</Typography>
 
                         <div>
                             <Typography marginBottom={{ xs: '2rem', xl: '2.5rem' }}>$ {data.product.price}</Typography>
 
                             <div style={{ display: 'flex', gap: '1rem' }}>
-                                <div style={{ backgroundColor: '#F1F1F1', fontWeight: 700 }}>
+                                <div className={styles['item-quantity-update-box']}>
                                     <Button className={styles['quantity-button']} onClick={() => updateQuantity('decrement')}>-</Button>
                                     {quantity}
                                     <Button className={styles['quantity-button']} onClick={() => updateQuantity('increment')}>+</Button>
@@ -72,7 +83,7 @@ export default function ProductPage() {
                                 <Button className={styles['add-to-cart-button']} onClick={() => addToCart()}>ADD TO CART</Button>
                             </div>
                         </div>
-                    </Box>
+                    </div>
                 </Box>
 
                 <Box 
@@ -84,18 +95,28 @@ export default function ProductPage() {
                 >
                     <Box width={{ xl: '65%' }}>
                         <Typography component='h2' variant='h5' fontWeight={700} marginBottom={{ xs: '1.5rem', md: '2rem' }}>FEATURES</Typography>
-                        <Typography>{data.product.features}</Typography>
+                        <Typography className={styles['sub-text']}>{data.product.features}</Typography>
                     </Box>
 
-                    <Box width={{ xl: '35%' }} display='flex' flexDirection={{ xs: 'column', md: 'row', xl: 'column'}}>
-                        <Typography component='h2' variant='h5' fontWeight={700} marginBottom={{ xs: '1.5rem', md: '0', xl: '2rem' }} width={{ xs: '100%', md: '50%', xl: '100%' }}>IN THE BOX</Typography>
+                    <Box width={{ xl: '35%' }} display='flex' flexDirection={{ xs: 'column', md: 'row', xl: 'column' }}>
+                        <Typography 
+                            component='h2' 
+                            variant='h5' 
+                            fontWeight={700} 
+                            marginBottom={{ xs: '1.5rem', md: '0', xl: '2rem' }} 
+                            width={{ xs: '100%', md: '50%', xl: '100%' }}
+                        >
+                            IN THE BOX
+                        </Typography>
 
-                        <div>{data.product.includes.map((included, index) => (
-                            <Typography key={index}>
-                                <span style={{ color: '#D87D4A', fontWeight: 700, marginRight: '1.5rem' }}>{included.quantity}x</span>
-                                {included.item}
-                            </Typography>
-                        ))}</div>
+                        <div>
+                            {data.product.includes.map((included, index) => (
+                                <Typography className={styles['sub-text']} key={index}>
+                                    <span style={{ color: '#D87D4A', fontWeight: 700, marginRight: '1.5rem', opacity: 1 }}>{included.quantity}x</span>
+                                    {included.item}
+                                </Typography>
+                            ))}
+                        </div>
                     </Box>
                 </Box>
 
