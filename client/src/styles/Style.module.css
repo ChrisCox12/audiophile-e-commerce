@@ -57,6 +57,12 @@
 .back-button {
     text-decoration: none;
     color: black;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.back-button:hover {
+    color: #D87D4A;
 }
 
 .sub-text {
@@ -74,6 +80,21 @@
 
 .item-quantity-update-box button:hover {
     color: #D87D4A;
+}
+
+@media screen and (min-width: 1200px) {
+    .back-button {
+        margin-bottom: 3.5rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 
@@ -318,11 +339,113 @@
     }
 }
 
-@media screen and (min-width: 1200px) {
-    .page-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+
+/*  
+    ***********************
+        CHECKOUT PAGE
+    ***********************  
+*/
+
+.form-section-head {
+    margin-bottom: 1rem !important;
+    font-weight: 700 !important;
+    color: #D87D4A;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column !important;
+    gap: 1rem;
+    width: 100%;
+}
+
+.form-input label {
+    font-weight: 600;
+}
+
+.form-input input {
+    border: 1px solid gray;
+    border-radius: 7px;
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+}
+
+.form-input input:focus {
+    outline: 1px solid #D87D4A;
+    border: 1px solid #D87D4A;
+}
+
+.form-input input:invalid {
+    border: 1px solid red;
+    outline: 1px solid red;
+}
+
+.form-input input:invalid ~ span {
+    display: block;
+}
+
+.form-input span {
+    display: none;
+    color: red;
+}
+
+.summary-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-info p {
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.summary-info span {
+    font-weight: 700;
+}
+
+.pay-button {
+    padding: 1rem 0 !important;
+    margin-top: 2rem !important;
+    background-color: #D87D4A !important;
+    color: white !important;
+    border-radius: 0 !important;
+    width: 100%;
+    font-weight: 600 !important;
+    letter-spacing: 1px;
+}
+
+.pay-button:hover {
+    background-color: #FBAF85 !important;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.order-item-image {
+    border-radius: 7px;
+    background-color: #F1F1F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.order-item img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+}
+
+.item-name {
+    font-weight: 700 !important;
+}
+
+.item-price,
+.item-quantity {
+    font-weight: 700 !important;
+    opacity: 0.7;
 }

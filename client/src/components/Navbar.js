@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AppBar, Grid, IconButton, Toolbar, Stack } from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Stack, Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
@@ -8,11 +8,13 @@ import MobileMenu from "./MobileMenu";
 
 import logo from '../assets/audiophile 2.svg';
 import styles from '../styles/Style.module.css';
+import { useSelector } from "react-redux";
 
 
 export default function Navbar() {
     const [showCart, setShowCart] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const cart = useSelector(state => state.cart);
 
     function closeCart() {
         setShowCart(false);
@@ -53,7 +55,9 @@ export default function Navbar() {
                 </Stack>
 
                 <IconButton sx={{ marginLeft: { sm: 'auto', md: '0' } }} onClick={() => setShowCart(!showCart)}>
-                    <ShoppingCartOutlinedIcon sx={{ color: 'white' }} />
+                    <Badge badgeContent={cart.length} color='primary'>
+                        <ShoppingCartOutlinedIcon sx={{ color: 'white' }} />
+                    </Badge>
                 </IconButton>
 
                 <MobileMenu showMenu={showMobileMenu} closeMenu={closeMenu} />

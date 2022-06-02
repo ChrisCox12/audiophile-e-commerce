@@ -11,10 +11,16 @@ export const cartSlice = createSlice({
                 const item = state.find(itm => itm.slug === action.payload.slug);
 
                 if(item) {
-                    if(item.quantity < 10 && (item.quantity + action.payload.quantity) < 10) item.quantity += action.payload.quantity;
-                    else item.quantity = 10;
+                    if(item.quantity < 10 && (item.quantity + action.payload.quantity) < 10) {
+                        item.quantity += action.payload.quantity;
+                    }
+                    else {
+                        item.quantity = 10;
+                    }
                 }
-                else state.push(action.payload);
+                else {
+                    state.push(action.payload);
+                }
             }
             else {
                 state.push(action.payload);

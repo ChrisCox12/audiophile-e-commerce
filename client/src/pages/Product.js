@@ -9,6 +9,7 @@ import AboutUs from '../components/AboutUs';
 import { useGetProductQuery } from '../redux/productApi';
 import { addItem } from '../redux/cartSlice';
 import { useDispatch } from 'react-redux';
+import millify from 'millify';
 import styles from '../styles/Style.module.css';
 
 
@@ -71,7 +72,7 @@ export default function ProductPage() {
                         <Typography className={styles['sub-text']} marginBottom={{ xs: '1.5rem', md: '2rem' }}>{data.product.description}</Typography>
 
                         <div>
-                            <Typography marginBottom={{ xs: '2rem', xl: '2.5rem' }}>$ {data.product.price}</Typography>
+                            <Typography marginBottom={{ xs: '2rem', xl: '2.5rem' }}>$ {(data.product.price).toLocaleString()}</Typography>
 
                             <div style={{ display: 'flex', gap: '1rem' }}>
                                 <div className={styles['item-quantity-update-box']}>

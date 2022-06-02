@@ -66,7 +66,7 @@ export default function Cart({ showCart, closeCart }) {
                                     <AdvancedImage cldImg={cld.image(item.image)} style={{ width: '4rem', height: '4rem', backgroundColor: '#F1F1F1', borderRadius: '7px', padding: '0.75rem' }} />
                                     <div>
                                         <Typography>{item.name}</Typography>
-                                        <Typography>$ {item.price}</Typography>
+                                        <Typography>$ {(item.price).toLocaleString()}</Typography>
                                     </div>
                                 </Box>
 
