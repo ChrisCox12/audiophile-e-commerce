@@ -1,23 +1,38 @@
 //import logo from './logo.svg';
 //import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import HomePage from "./pages/Home";
 import CheckoutPage from "./pages/Checkout";
-import EarphonesPage from "./pages/Earphones";
-import HeadphonesPage from "./pages/Headphones";
 import ProductPage from "./pages/Product";
-import SpeakersPage from "./pages/Speakers";
 import AdminDashboardPage from './pages/AdminDashboard';
 import AdminLoginPage from './pages/AdminLogin';
 import CategoryPage from './pages/Category';
 import theme from './styles/theme';
 import Layout from './components/Layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCart } from './redux/cartSlice';
 
 
 function App() {
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
+
+    useEffect(() => {
+        if(localStorage.getItem('cart')) dispatch( setCart( JSON.parse( localStorage.getItem('cart') ) ) );
+    }, []);
+
+    useEffect(() => {
+        if(cart.length > 0) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        else {
+            localStorage.removeItem('cart');
+        }
+    }, [cart]);
+    
 
     return (
         <ThemeProvider theme={theme}>

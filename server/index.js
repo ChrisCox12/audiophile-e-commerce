@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 
 import productRoutes from './routes/products.js';
+import orderRoutes from './routes/orders.js';
 
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 const PORT = process.env.PORT || 8000;
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
 
 
 mongoose

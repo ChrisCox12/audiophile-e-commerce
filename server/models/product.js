@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const productSchema = mongoose.Schema({
     slug: String,
     name: String,
@@ -30,6 +31,7 @@ const productSchema = mongoose.Schema({
         third: String
     }
 });
+
 
 const Product = mongoose.model('Product', productSchema);
 

@@ -99,6 +99,8 @@ export async function updateProduct(req, res) {
         if(!product) return res.json({ success: false, msg: 'Could not find that product' });
 
         await Product.findByIdAndUpdate(id, req.body);
+
+        res.json({ success: true, msg: 'Successfully updated product' });
     } 
     catch(error) {
         console.log(error);

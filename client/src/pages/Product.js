@@ -8,7 +8,7 @@ import CategoryCards from '../components/CategoryCards';
 import AboutUs from '../components/AboutUs';
 import { useGetProductQuery } from '../redux/productApi';
 import { addItem } from '../redux/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import millify from 'millify';
 import styles from '../styles/Style.module.css';
 
@@ -20,7 +20,7 @@ export default function ProductPage() {
     const { data, isFetching } = useGetProductQuery(slug);
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
-    console.log(data)
+    
 
     function updateQuantity(option) {
         if(option === 'increment') {
@@ -47,6 +47,7 @@ export default function ProductPage() {
         );
     }
 
+    
     if(isFetching) return <Typography>Loading...</Typography>;
 
     return (

@@ -6,6 +6,8 @@ import styles from '../styles/Style.module.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import OrderCompleteModal from '../components/OrderComplete';
 
 
 
@@ -21,10 +23,13 @@ export default function CheckoutPage() {
     const [eMoneyNumber, setEMoneyNumber] = useState('');
     const [eMoneyPin, setEMoneyPin] = useState('');
     const [total, setTotal] = useState(0);
+    const [orderComplete, setOrderComplete] = useState(false);
+    const [close, setClose] = useState(false);
     const shipping = 15;
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
     
+
     useEffect(() => {
         let t = 0;
 
@@ -35,8 +40,46 @@ export default function CheckoutPage() {
 
     //useEffect(() => {console.log(paymentMethod)}, [paymentMethod])
 
-    async function handleSubmit() {
+    function handleCloseOrderConfirm() {
+        setOrderComplete(false);
+    }
 
+
+    async function handleSubmit() {
+        const toSubmit = {
+            customer: {
+                name: name,
+                email: email,
+                phone: phone,
+                address: address,
+                city: city,
+                country: country,
+                zip: zip
+            },
+            cart: cart,
+            payment: {
+                method: paymentMethod,
+                cardNumber: eMoneyNumber,
+                cardPin: eMoneyPin
+            },
+            orderTotal: total
+        };
+
+        try {
+            const response = await axios.post('http://localhost:8000/orders', toSubmit);
+
+            //console.log(response);
+
+            if(response.data.success) {
+                setOrderComplete(true);
+            }
+            else {
+                alert(response.data.msg);
+            }
+        } 
+        catch(error) {
+            console.log(error);    
+        }
     }
 
     function CustomControlLabel(props) {
@@ -61,7 +104,7 @@ export default function CheckoutPage() {
                 <Link className={styles['back-button']} to='/'>Go Back</Link>
 
                 <Box className='checkout-content' display='flex' flexDirection={{ xs: 'column', xl: 'row' }} gap='2rem'>
-                    <Box className='customer-form' bgcolor='white' borderRadius='7px' width={{ xs: '100%', xl: '70%' }} padding={{ xs: '1.5rem 1.5rem 2rem', md: '2rem 1.5rem', lg: '2.5rem', xl: '3.5rem 3rem' }}>
+                    <Box className={styles['customer-form']} width={{ xs: '100%', xl: '70%' }} padding={{ xs: '1.5rem 1.5rem 2rem', md: '2rem 1.5rem', lg: '2.5rem', xl: '3.5rem 3rem' }}>
                         <Typography component='h1' variant='h3' fontWeight={700} marginBottom={{ xs: '2rem', md: '2.5rem' }}>CHECKOUT</Typography>
 
                         <Box marginBottom={{ xs: '2rem', md: '3rem', xl: '4rem' }}>
@@ -126,7 +169,6 @@ export default function CheckoutPage() {
                                             <Typography fontWeight={700}>e-Money Number</Typography>
                                             <input type='text' id='e-money-number' name='e-money-number' onChange={(e) => setEMoneyNumber(e.target.value)} />
                                         </div>
-
                                         <div className={styles['form-input']}>
                                             <Typography fontWeight={700}>e-Money PIN</Typography>
                                             <input type='text' id='e-money-pin' name='e-money-pin' onChange={(e) => setEMoneyPin(e.target.value)} />
@@ -144,7 +186,7 @@ export default function CheckoutPage() {
                         </Box>
                     </Box>
 
-                    <Box className='order-summary' bgcolor='white' borderRadius='7px' height='fit-content' width={{ xs: '100%', xl: '30%' }} padding={{ xs: '2rem 1.5rem', md: '2rem' }}>
+                    <Box className={styles['order-summary']} width={{ xs: '100%', xl: '30%' }} padding={{ xs: '2rem 1.5rem', md: '2rem' }}>
                         <Typography component='h2' variant='h4' fontWeight={700} marginBottom='2rem'>SUMMARY</Typography>
 
                         {cart.map(item => (
@@ -178,10 +220,12 @@ export default function CheckoutPage() {
                             </div>
                         </Stack>
 
-                        <Button className={styles['pay-button']}>CONTINUE & PAY</Button>
+                        <Button className={styles['pay-button']} onClick={handleSubmit}>CONTINUE & PAY</Button>
                     </Box>
                 </Box>
             </Box>
+
+            <OrderCompleteModal isComplete={orderComplete} handleClose={handleCloseOrderConfirm} cartTotal={total} />
         </div>
     )
 }
