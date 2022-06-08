@@ -535,3 +535,40 @@
     font-weight: 700 !important;
     opacity: 0.7;
 }
+
+
+
+
+/*  
+    ***********************
+        ADMIN PAGE(s)
+    ***********************  
+*/
+
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.admin-navlinks {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+.admin-navlinks:hover {
+    background-color: #D87D4A;
+}
+
+.admin-navlinks[data-selected='true'] {
+    background-color: #D87D4A;
+}
+
+.admin-navlinks span {
+    font-weight: 700;
+    font-size: 1.125rem;
+}

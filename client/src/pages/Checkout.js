@@ -45,7 +45,9 @@ export default function CheckoutPage() {
     }
 
 
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault();
+
         const toSubmit = {
             customer: {
                 name: name,
