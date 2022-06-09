@@ -48,6 +48,20 @@ export async function getProductBySlug(req, res) {
     }
 }
 
+export async function getTotalProducts(req, res) {
+    try {
+        const products = await Product.find();
+
+        if(!products) return res.json({ success: false, msg: 'Could not find any products' });
+
+        res.json({ success: true, msg: 'Successfully retrieved products', totalProducts: products.length });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieve products' });
+    }
+}
+
 export async function createProduct(req, res) {
     const productInfo = req.body;
     const image = productInfo.image;

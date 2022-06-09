@@ -5,7 +5,53 @@ export async function getAllOrders(req, res) {
     try {
         const orders = await Order.find();
 
-        if(!orders) return res.json({ success: false, msg: 'Could not find any products' });
+        if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
+
+        res.json({ success: true, msg: 'Successfully retrieved orders', orders: orders });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieved orders' });    
+    }
+}
+
+export async function getTotalSales(req, res) {
+    try {
+        const orders = await Order.find();
+
+        if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
+
+        let sales = 0;
+        
+        orders.map(order => { sales += order.orderTotal });
+
+        res.json({ success: true, msg: 'Successfully retrieved sales', totalSales: sales  });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieved sales' });    
+    }
+}
+
+export async function getTotalOrders(req, res) {
+    try {
+        const orders = await Order.find();
+
+        if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
+
+        res.json({ success: true, msg: 'Successfully retrieved orders', totalOrders: orders.length });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieved orders' });    
+    }
+}
+
+export async function getLatestOrders(req, res) {
+    try {
+        const orders = await Order.find().sort({ created_at: -1 }).limit(10);
+
+        if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
 
         res.json({ success: true, msg: 'Successfully retrieved orders', orders: orders });
     } 

@@ -28,6 +28,10 @@ export default function AdminNavbar() {
         setAnchorEl(null);
     }
 
+    function handleCloseMobileMenu() {
+        setShowMenu(false);
+    }
+
 
     return (
         <AppBar className='admin-navbar' position='static' sx={{ height: { xs: '5.5rem', md: '100vh' }, width: { md: '20rem' }, flexShrink: 'unset', borderRight: { md: '2px solid #D87D4A' } }}>
@@ -53,7 +57,7 @@ export default function AdminNavbar() {
                     </div>
                 </Box>
 
-                <AdminMenu showMenu={showMenu} />
+                <AdminMenu showMenu={showMenu} closeMenu={handleCloseMobileMenu} />
 
                 <Box display={{ xs:'none', md: 'flex' }} flexDirection='column' width='100%'>
                     <Link to='/admin' className={styles['admin-navlinks']} data-selected={location.pathname === '/admin'}>

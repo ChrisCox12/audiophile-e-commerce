@@ -16,10 +16,13 @@ export const productApi = createApi({
         }),
         getProduct: builder.query({
             query: (slug) => createRequest(`/products/product/${slug}`)
+        }),
+        getTotalProducts: builder.query({
+            query: () => createRequest('/products/total')
         })
     })
 });
 
 
 
-export const { useGetProductsByCategoryQuery, useGetProductQuery } = productApi;
+export const { useGetProductsByCategoryQuery, useGetProductQuery, useGetTotalProductsQuery } = productApi;

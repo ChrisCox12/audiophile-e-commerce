@@ -30,8 +30,8 @@ const orderSchema = mongoose.Schema({
         cardPin: String  
     },
     delivered: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: 'Pending'
     }
 });
 
