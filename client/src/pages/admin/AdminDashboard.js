@@ -3,21 +3,24 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Style.module.css';
 import { useGetTotalProductsQuery } from '../../redux/productApi';
-import { useGetTotalSalesQuery, useGetTotalOrdersQuery } from '../../redux/orderApi';
+import { useGetTotalSalesQuery, useGetTotalOrdersQuery, useGetPastYearOrdersQuery } from '../../redux/orderApi';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
 import OrdersTable from '../../components/OrdersTable';
+import BarChart from '../../components/BarChart';
 
 
 export default function AdminDashboardPage() {
     const [orders, setOrders] = useState([]);
+    //const [pastYearOrders, setPastYearOrders] = useState([]);
+    const { data: pastYearOrders, isFetching: fetchingPastOrders } = useGetPastYearOrdersQuery();
     const { data: totalSales, isFetching: fetchingSales } = useGetTotalSalesQuery();
     const { data: totalProducts, isFetching: fetchingProducts } = useGetTotalProductsQuery();
     const { data: totalOrders, isFetching: fetchingTotalOrders } = useGetTotalOrdersQuery();
 
-    console.log(orders)
+    //console.log(pastYearOrders)
 
     
     useEffect(() => {
@@ -70,6 +73,8 @@ export default function AdminDashboardPage() {
                     </div>
                 </Box>
             </Box>
+
+            <BarChart pastYearOrders={pastYearOrders?.pastYearOrders} />
 
             <OrdersTable orders={orders} />
         </Box>

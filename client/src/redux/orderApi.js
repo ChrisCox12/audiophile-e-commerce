@@ -18,9 +18,12 @@ export const orderApi = createApi({
         }),
         getTotalOrders: builder.query({
             query: () => createRequest('/orders/totalOrders')
+        }),
+        getPastYearOrders: builder.query({
+            query: () => createRequest('/orders/pastYear')
         })
     })
 });
 
 
-export const { useGetOrdersQuery, useGetTotalSalesQuery, useGetTotalOrdersQuery } = orderApi;
+export const { useGetOrdersQuery, useGetTotalSalesQuery, useGetTotalOrdersQuery, useGetPastYearOrdersQuery } = orderApi;

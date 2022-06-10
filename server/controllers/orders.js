@@ -1,4 +1,5 @@
 import Order from "../models/order.js";
+import moment from 'moment';
 
 
 export async function getAllOrders(req, res) {
@@ -58,6 +59,35 @@ export async function getLatestOrders(req, res) {
     catch(error) {
         console.log(error);
         res.json({ success: false, msg: 'Failed to retrieved orders' });    
+    }
+}
+
+export async function getPastYearOrders(req, res) {
+    try {
+        const currentMonth = moment(Date.now()).format('M');
+        const currentYear = moment(Date.now()).format('YYYY');
+        const pastYear = currentYear - 1;
+        const pastMonth = Number(currentMonth) + 1;
+        //console.log(new Date(`${pastYear}-${pastMonth}-01`))
+
+        //  .find( {FILTER}, {PROJECTION} )
+        const orders = await Order.find(
+            { 
+                created_at: { 
+                    $gte: new Date(`${pastYear}-${pastMonth}-01`), 
+                    $lt: Date.now() 
+                } 
+            }, 
+            { created_at: 1, orderTotal: 1, _id: 0 }
+        ).sort({ created_at: -1 });
+
+        if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
+
+        res.json({ success: true, msg: 'Successfully retrieved orders', pastYearOrders: orders });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieved orders' });   
     }
 }
 
