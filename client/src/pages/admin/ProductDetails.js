@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Box, Typography, Divider, Grid, Button, IconButton, RadioGroup, FormControlLabel, Radio, TextField, Input } from '@mui/material';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { useGetProductQuery } from '../../redux/productApi';
 import axiosInstance from '../../utils/axios';
+import { AdvancedImage } from '@cloudinary/react';
+import cld from '../../utils/cld';
 import styles from '../../styles/Style.module.css';
 
 
-export default function NewProductPage() {
+export default function ProductDetailsPage() {
+    const { slug: paramSlug } = useParams();
+    const { data: product, isFetching } = useGetProductQuery(paramSlug);
     const [name, setName] = useState('');
     const [slug, setSlug] = useState(' ');
     const [category, setCategory] = useState('earphones');
+    const [isNewProduct, setIsNewProduct] = useState(false);
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
     const [features, setFeatures] = useState('');
@@ -21,17 +27,34 @@ export default function NewProductPage() {
     const [galleryThird, setGalleryThird] = useState('');
     const navigate = useNavigate();
 
-
+    
     useEffect(() => {
         if( !localStorage.getItem('audiophile_admin_token') ) navigate('/admin/login');
     }, [])
+
+    useEffect(() => {
+        if(!isFetching) {
+            setName(product.product.name);
+            setSlug(product.product.slug);
+            setPrice(product.product.price);
+            setDescription(product.product.description);
+            setFeatures(product.product.features);
+            setIncludes(product.product.includes);
+            setCategory(product.product.category);
+            setIsNewProduct(product.product.new);
+            setImage(product.product.image);
+            setGalleryFirst(product.product.gallery.first);
+            setGallerySecond(product.product.gallery.second);
+            setGalleryThird(product.product.gallery.third);
+        }
+    }, [product, isFetching])
 
     
     function handleNameChange(e) {
         e.preventDefault();
 
         setName(e.target.value);
-        setSlug( (e.target.value).replaceAll(' ', '-').toLowerCase() ); //   replaces any empty space with dashes/hyphens
+        setSlug( (e.target.value).replaceAll(' ', '-').toLowerCase() ); //   replaces any empty space with dashes/hyphens and converts to lowercase, to sanitize
     }
 
     function handleAddItem(e) {
@@ -105,6 +128,7 @@ export default function NewProductPage() {
             slug: slug,
             image: image,
             category: category,
+            new: isNewProduct,
             description: description,
             features: features,
             includes: includesToSubmit,
@@ -117,7 +141,7 @@ export default function NewProductPage() {
         };
 
         try {
-            const response = await axiosInstance.post('products', toSubmit);
+            const response = await axiosInstance.patch(`products/${product.product._id}`, toSubmit);
 
             //console.log(response);
 
@@ -134,10 +158,12 @@ export default function NewProductPage() {
     }
 
 
+    if(isFetching) return <Typography>Loading...</Typography>;
+    
     return (
         <Box width='100%' bgcolor='#E1E1E1' display='flex' justifyContent='center' padding={{ xs: '1.25rem', md: '2rem', lg: '0' }} sx={{ overflowY: 'scroll' }}>
             <div style={{ maxWidth: '50rem', width: '100%' }}>
-                <Link className={styles['back-button-alt']} to='/admin/orders'>
+                <Link className={styles['back-button-alt']} to='/admin/products'>
                     <ArrowBackIosNewRoundedIcon />
                     <span>Go Back</span>
                 </Link>
@@ -154,22 +180,31 @@ export default function NewProductPage() {
                                 id='name' 
                                 label='Product Name' 
                                 fullWidth 
-                                required 
                                 error={name.length === 0} 
-                                helperText='Please enter a name for the product' 
+                                helperText='Please enter a name for the product'
+                                value={name} 
                                 onChange={handleNameChange}
                             />
                         </Grid>
                         <Grid className='slug' item xs={12} display='flex' flexDirection='column' gap='0.5rem'>
                             <TextField id='slug' label='Slug' value={slug} disabled />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={6}>
                             <Typography fontWeight={500}>Category</Typography>
                             <Box marginLeft='1.5rem'>
-                                <RadioGroup name='category-radio-buttons-group' defaultValue='earphones' value={category} onChange={(e) => setCategory(e.target.value)}>
+                                <RadioGroup name='category-radio-buttons-group' value={category} onChange={(e) => setCategory(e.target.value)}>
                                     <FormControlLabel value='earphones' control={<Radio />} label='Earphones' />
                                     <FormControlLabel value='headphones' control={<Radio />} label='Headphones' />
                                     <FormControlLabel value='speakers' control={<Radio />} label='Speakers' />
+                                </RadioGroup>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Typography fontWeight={500}>New Product?</Typography>
+                            <Box marginLeft='1.5rem'>
+                                <RadioGroup name='new-radio-buttons-group' value={isNewProduct} onChange={(e) => setIsNewProduct(e.target.value)}>
+                                    <FormControlLabel value={true} control={<Radio />} label='Yes' />
+                                    <FormControlLabel value={false} control={<Radio />} label='No' />
                                 </RadioGroup>
                             </Box>
                         </Grid>
@@ -179,6 +214,7 @@ export default function NewProductPage() {
                                 label='Price' 
                                 type='number' 
                                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', min: 0 }} 
+                                value={price}
                                 onChange={(e) => setPrice(e.target.value)} 
                             />
                         </Grid>
@@ -189,6 +225,7 @@ export default function NewProductPage() {
                                 fullWidth 
                                 multiline 
                                 minRows={10} 
+                                value={description}
                                 onChange={(e) => setDescription(e.target.value)} 
                             />
                         </Grid>
@@ -199,6 +236,7 @@ export default function NewProductPage() {
                                 fullWidth 
                                 multiline 
                                 minRows={10} 
+                                value={features}
                                 onChange={(e) => setFeatures(e.target.value)} 
                             />
                         </Grid>
@@ -243,23 +281,27 @@ export default function NewProductPage() {
                         </Grid>
                         <Grid className={styles['new-product-images-grid-section']} item xs={12} lg={10}>
                             <Typography component='label' htmlFor='image'>Product Image:</Typography>
-                            <Input type='file' name='image' id='image' onChange={handleFileInputChange} required />
-                            {image && <img src={image} alt='' />}
+                            <Input type='file' name='image' id='image' onChange={handleFileInputChange} disabled />
+                            {/* {image && <img src={image} alt='' />} */}
+                            {image && <AdvancedImage cldImg={cld.image(image)} />}
                         </Grid>
                         <Grid className={styles['new-product-images-grid-section']} item xs={12} lg={4}>
                             <Typography component='label' htmlFor='gallery-first'>First Gallery Image:</Typography>
-                            <Input type='file' name='gallery-first' id='gallery-first' onChange={handleFileInputChange} />
-                            {galleryFirst && <img src={galleryFirst} alt='' />}
+                            <Input type='file' name='gallery-first' id='gallery-first' onChange={handleFileInputChange} disabled />
+                            {/* {galleryFirst && <img src={galleryFirst} alt='' />} */}
+                            {galleryFirst && <AdvancedImage cldImg={cld.image(galleryFirst)} />}
                         </Grid>
                         <Grid className={styles['new-product-images-grid-section']} item xs={12} lg={4}>
                             <Typography component='label' htmlFor='gallery-second'>Second Gallery Image:</Typography>
-                            <Input type='file' name='gallery-second' id='gallery-second' onChange={handleFileInputChange} />
-                            {gallerySecond && <img src={gallerySecond} alt='' />}
+                            <Input type='file' name='gallery-second' id='gallery-second' onChange={handleFileInputChange} disabled />
+                            {/* {gallerySecond && <img src={gallerySecond} alt='' />} */}
+                            {gallerySecond && <AdvancedImage cldImg={cld.image(gallerySecond)} />}
                         </Grid>
                         <Grid className={styles['new-product-images-grid-section']} item xs={12} lg={4}>
                             <Typography component='label' htmlFor='gallery-third'>Third Gallery Image:</Typography>
-                            <Input type='file' name='gallery-third' id='gallery-third' onChange={handleFileInputChange} />
-                            {galleryThird && <img src={galleryThird} alt='' />}
+                            <Input type='file' name='gallery-third' id='gallery-third' onChange={handleFileInputChange} disabled />
+                            {/* {galleryThird && <img src={galleryThird} alt='' />} */}
+                            {galleryThird && <AdvancedImage cldImg={cld.image(galleryThird)} />}
                         </Grid>
                     </Grid>
 

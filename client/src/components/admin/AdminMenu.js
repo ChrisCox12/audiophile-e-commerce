@@ -14,7 +14,7 @@ export default function AdminMenu({ showMenu, closeMenu }) {
     return (
         <Modal className='nav-modal' open={showMenu} onClose={closeMenu} sx={{ zIndex: 99, display: { md: 'none' } }}>
             <Slide direction='right' in={showMenu} mountOnEnter unmountOnExit>
-                <Box display='flex' flexDirection='column' width='50%' minWidth='14rem' height='100vh' bgcolor='black' position='absolute' left='0' top='5.5rem' borderTop='2px solid #D87D4A' borderRight='2px solid #D87D4A'>
+                <Box display='flex' flexDirection='column' width='50%' minWidth='14rem' height='100vh' bgcolor='black' position='absolute' left='0' top='3.5rem' borderTop='2px solid #D87D4A' borderRight='2px solid #D87D4A'>
                     <Link to='/admin' className={styles['admin-navlinks']} data-selected={location.pathname === '/admin'} onClick={closeMenu}>
                         <HomeRoundedIcon fontSize='large' />
                         <span>Dashboard</span>

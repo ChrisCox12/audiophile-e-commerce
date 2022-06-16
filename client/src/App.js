@@ -1,8 +1,6 @@
-//import logo from './logo.svg';
-//import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import HomePage from "./pages/Home";
 import CheckoutPage from "./pages/Checkout";
@@ -17,7 +15,9 @@ import { setCart } from './redux/cartSlice';
 import AdminLayout from './components/admin/AdminLayout';
 import NewProductPage from './pages/admin/NewProduct';
 import OrdersPage from './pages/admin/Orders';
+import OrderDetailsPage from './pages/admin/OrderDetails';
 import ProductsPage from './pages/admin/Products';
+import ProductDetailsPage from './pages/admin/ProductDetails';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     const cart = useSelector(state => state.cart);
 
     useEffect(() => {
-        if(localStorage.getItem('cart')) dispatch( setCart( JSON.parse( localStorage.getItem('cart') ) ) );
+        if( localStorage.getItem('cart') ) dispatch( setCart( JSON.parse( localStorage.getItem('cart') ) ) );
     }, []);
 
     useEffect(() => {
@@ -56,13 +56,13 @@ function App() {
                             <Route index element={<AdminDashboardPage />} />
                             <Route path='create-product' element={<NewProductPage />} />
                             <Route path='orders' element={<OrdersPage />} />
+                            <Route path='order/:orderId' element={<OrderDetailsPage />} />
                             <Route path='products' element={<ProductsPage />} />
+                            <Route path='product/:slug' element={<ProductDetailsPage />} />
                         </Route>
                         
                         <Route path='login' element={<AdminLoginPage />} />
                     </Route>
-                    {/* <Route path='/admin' element={<AdminDashboardPage />} />
-                    <Route path='/login' element={<AdminLoginPage />} /> */}
                 </Routes>
             </Router>
         </ThemeProvider>

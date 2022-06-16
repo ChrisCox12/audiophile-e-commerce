@@ -3,8 +3,12 @@ import moment from 'moment';
 
 
 export async function getAllOrders(req, res) {
+    const { admin } = req;
+
     try {
-        const orders = await Order.find();
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
+        const orders = await Order.find().sort({ created_at: -1 });
 
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
 
@@ -16,8 +20,31 @@ export async function getAllOrders(req, res) {
     }
 }
 
-export async function getTotalSales(req, res) {
+export async function getOrderById(req, res) {
+    const { id } = req.params;
+    const { admin } = req;
+
     try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
+        const order = await Order.findById(id);
+
+        if(!order) return res.json({ success: false, msg: 'Could not find that order' });
+
+        res.json({ success: true, msg: 'Successfully retrieved order', order: order });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to retrieved order' });
+    }
+}
+
+export async function getTotalSales(req, res) {
+    const { admin } = req;
+
+    try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
         const orders = await Order.find();
 
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
@@ -35,7 +62,11 @@ export async function getTotalSales(req, res) {
 }
 
 export async function getTotalOrders(req, res) {
+    const { admin } = req;
+
     try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
         const orders = await Order.find();
 
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
@@ -49,7 +80,13 @@ export async function getTotalOrders(req, res) {
 }
 
 export async function getLatestOrders(req, res) {
+    const { admin } = req;
+
+    //console.log(admin)
+
     try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
         const orders = await Order.find().sort({ created_at: -1 }).limit(10);
 
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
@@ -63,11 +100,16 @@ export async function getLatestOrders(req, res) {
 }
 
 export async function getPastYearOrders(req, res) {
+    const { admin } = req;
+
     try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
         const currentMonth = moment(Date.now()).format('M');
+        //const currentMonth = 11;
         const currentYear = moment(Date.now()).format('YYYY');
         const pastYear = currentYear - 1;
-        const pastMonth = Number(currentMonth) + 1;
+        const pastMonth = Number(currentMonth) === 12 ? 1 : Number(currentMonth) + 1;
         //console.log(new Date(`${pastYear}-${pastMonth}-01`))
 
         //  .find( {FILTER}, {PROJECTION} )
@@ -84,6 +126,7 @@ export async function getPastYearOrders(req, res) {
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
 
         res.json({ success: true, msg: 'Successfully retrieved orders', pastYearOrders: orders });
+        //res.json({ msg:'lol' })
     } 
     catch(error) {
         console.log(error);
@@ -108,14 +151,43 @@ export async function createOrder(req, res) {
 
 export async function editOrder(req, res) {
     const { id } = req.params;
+    const { admin } = req;
 
     try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
         const order = await Order.findById(id);
 
         if(!order) return res.json({ success: false, msg: 'Could not find order' });
 
         await Order.findByIdAndUpdate(id, req.body);
 
+        res.json({ success: true, msg: 'Successfully updated order' });
+    } 
+    catch(error) {
+        console.log(error);
+        res.json({ success: false, msg: 'Failed to create order' });
+    }
+}
+
+export async function editDeliveryStatus(req, res) {
+    const { id } = req.params;
+    const { status } = req.body;
+    const { admin } = req;
+
+    try {
+        if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
+
+        const order = await Order.findById(id);
+
+        if(!order) return res.json({ success: false, msg: 'Could not find that order' });
+
+        //order.delivered = 'Pending'
+        order.delivered = status;
+
+        await order.save();
+
+        //console.log(status)
         res.json({ success: true, msg: 'Successfully updated order' });
     } 
     catch(error) {

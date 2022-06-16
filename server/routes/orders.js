@@ -1,18 +1,21 @@
 import express from 'express';
-import { getAllOrders, getTotalOrders, getTotalSales, createOrder, editOrder, getLatestOrders, getPastYearOrders } from '../controllers/orders.js';
+import { getAllOrders, getOrderById, getTotalOrders, getTotalSales, createOrder, editOrder, getLatestOrders, getPastYearOrders, editDeliveryStatus } from '../controllers/orders.js';
+import { validateToken } from '../middleware/validateToken.js';
 
 
 const router = express.Router();
 
-router.get('/', getAllOrders);
-router.get('/totalOrders', getTotalOrders);
-router.get('/totalSales', getTotalSales);
-router.get('/latestOrders', getLatestOrders);
-router.get('/pastYear', getPastYearOrders);
+router.get('/', validateToken, getAllOrders);
+router.get('/id/:id', validateToken, getOrderById);
+router.get('/totalOrders', validateToken, getTotalOrders);
+router.get('/totalSales', validateToken, getTotalSales);
+router.get('/latestOrders', validateToken, getLatestOrders);
+router.get('/pastYear', validateToken, getPastYearOrders);
 
 router.post('/', createOrder);
 
-router.patch('/:id', editOrder);
+router.patch('/:id', validateToken, editOrder);
+router.patch('/delivery/:id', validateToken, editDeliveryStatus);
 
 
 export default router;

@@ -1,42 +1,28 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useGetOrdersQuery } from '../../redux/orderApi';
+import OrdersTable from '../../components/OrdersTable';
 import styles from '../../styles/Style.module.css';
-//import { useGetOrdersQuery } from '../../redux/orderApi';
-
 
 
 export default function OrdersPage() {
-    //const { data, isFetching } = useGetOrdersQuery();
-    //console.log(data)
-    const [orders, setOrders] = useState([]);
+    const { data: orders, isFetching } = useGetOrdersQuery();
+    const navigate = useNavigate();
 
+    
     useEffect(() => {
-        const controller = new AbortController();
-        
-        async function getOrders() {
-            try {
-                const response = await axios.get('http://localhost:8000/orders');
-
-                if(response.data.success) {
-                    setOrders(response.data.orders);
-                }
-                else {
-                    console.log(response.data.msg);
-                }
-            } 
-            catch(error) {
-                console.log(error);    
-            }
-        }
-
-        getOrders();
-
-        return () => controller.abort();
+        if(!localStorage.getItem('audiophile_admin_token')) navigate('/admin/login');
     }, [])
 
 
+    if(isFetching) return <Typography>Loading...</Typography>;
+
     return (
-        <Box width='100%' padding={{ xs: '1.5rem', md: '2rem'}}>orders</Box>
+        <Box width='100%' overflow='scroll' bgcolor='#E1E1E1' padding={{ xs: '1.5rem', md: '2rem'}}>
+            <Typography className={styles['page-header']} component='h1' variant='h4'>Orders</Typography>
+
+            <OrdersTable orders={orders?.orders} />
+        </Box>
     )
 }

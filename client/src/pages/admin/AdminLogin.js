@@ -1,8 +1,8 @@
-import { Box, Typography, Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Box, Typography, Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Style.module.css';
-
+import axiosInstance from '../../utils/axios';
 
 
 export default function AdminLoginPage() {
@@ -10,15 +10,30 @@ export default function AdminLoginPage() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if( localStorage.getItem('audiophile_admin_token') ) navigate('/admin');
+    }, []);
+
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if(username === 'admin' && password === 'password') {
-            navigate('/admin');
-        }
-        else {
-            alert('Incorrect credentials. Please check and try again');
+        const toSubmit = { username: username, password: password };
+
+        try {
+            const response = await axiosInstance.post('admin/login', toSubmit);
+
+            if(response.data.success) {
+                //console.log(response)
+                localStorage.setItem('audiophile_admin_token', response.data.adminToken);
+                navigate('/admin');
+            }
+            else {
+                alert(response.data.msg);
+            }
+        } 
+        catch(error) {
+           console.log(error); 
         }
     }
 
@@ -30,13 +45,10 @@ export default function AdminLoginPage() {
                 
                 <form onSubmit={handleSubmit} style={{ width: '15rem' }}>
                     <Box display='flex' flexDirection='column' gap='0.5rem' marginBottom='1rem'>
-                        <label htmlFor='username'>Username</label>
-                        <input type='text' id='username' name='username' onChange={(e) => setUsername(e.target.value)} />
+                        <TextField label='Username' id='username' onChange={(e) => setUsername(e.target.value)} required fullWidth helperText='Username: admin' />
                     </Box>
-
                     <Box display='flex' flexDirection='column' gap='0.5rem' marginBottom='1.5rem'>
-                        <label htmlFor='password'>Password</label>
-                        <input type='password' id='password' name='password' onChange={(e) => setPassword(e.target.value)} />
+                        <TextField label='Password' id='password' onChange={(e) => setPassword(e.target.value)} required fullWidth helperText='Password: admin' />
                     </Box>
 
                     <Button type='submit' variant='contained' fullWidth>Login</Button>

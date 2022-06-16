@@ -4,7 +4,7 @@ import uploadImage from "../utils/uploadImage.js";
 
 export async function getAllProducts(req, res) {
     try {
-        const products = await Product.find();
+        const products = await Product.find().sort({ category: 1, name: 1 });
 
         if(!products) return res.json({ success: false, msg: 'Could not find any products' });
 
@@ -20,7 +20,7 @@ export async function getProductsByCategory(req, res) {
     const { category } = req.params;
 
     try {
-        const products = await Product.find({ category: category });
+        const products = await Product.find({ category: category }).sort({ new: -1 });
 
         if(!products) return res.json({ success: false, msg: 'Could not find any products' });
 
@@ -66,9 +66,12 @@ export async function createProduct(req, res) {
     const productInfo = req.body;
     const image = productInfo.image;
     const galleryImages = productInfo.gallery;
+    const { admin } = req;
     
     try {
-        /* const productImage = uploadImage(image);
+        if(!admin) return res.json({ success: false, msg: 'Failed to create product; Could not verify your credentials' });
+
+        const productImage = uploadImage(image);
         const galleryImageFirst = uploadImage(galleryImages.first);
         const galleryImageSecond = uploadImage(galleryImages.second);
         const galleryImageThird = uploadImage(galleryImages.third);
@@ -88,10 +91,10 @@ export async function createProduct(req, res) {
                 second: imageResponses[2],
                 third: imageResponses[3]
             } 
-        }; */
+        };
 
-        //const product = new Product(toSave);
-        const product = new Product(req.body);
+        const product = new Product(toSave);
+        //const product = new Product(req.body);
 
         await product.save();
 
@@ -106,6 +109,8 @@ export async function createProduct(req, res) {
 
 export async function updateProduct(req, res) {
     const { id } = req.params;
+
+    //console.log(req.body)
 
     try {
         const product = await Product.findById(id);
