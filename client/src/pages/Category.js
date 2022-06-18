@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { AdvancedImage } from '@cloudinary/react';
 import { Link } from 'react-router-dom';
@@ -7,13 +7,27 @@ import { useGetProductsByCategoryQuery } from '../redux/productApi';
 import AboutUs from '../components/AboutUs';
 import CategoryCards from '../components/CategoryCards';
 import styles from '../styles/Style.module.css';
-
+import { useEffect, useState } from 'react';
 
 
 export default function CategoryPage() {
     const { category } = useParams();
     const { data, isFetching } = useGetProductsByCategoryQuery(category);
+    const [products, setProducts] = useState(data?.products);
+
+
+    useEffect(() => {
+        if(!isFetching) setProducts(data?.products);
+    }, [data]);
     
+
+    function handleSearchBarInput(e) {
+        //  filter data by checking the sanitized (in this case, lowercase) input and name
+        const filtered = (data?.products)?.filter(product => (product.name).toLowerCase().includes( (e.target.value).toLowerCase() ));
+
+        setProducts(filtered);
+    }
+
 
     if(isFetching) return <Typography>Loading...</Typography>;
 
@@ -24,7 +38,14 @@ export default function CategoryPage() {
                 
 
                 <Box className='category-page-content' padding={{ xs: '4rem 1.5rem', md: '7.5rem 2.5rem', xl: '10rem 0' }}>
-                    {data?.products?.map((product, index) => (
+                    <TextField 
+                        label='Search'
+                        fullWidth
+                        onChange={handleSearchBarInput}
+                        sx={{ marginBottom: '1.5rem' }}
+                    />
+                    
+                    {products?.map((product, index) => (
                         <Box 
                             className='product' 
                             display='flex' 
@@ -37,7 +58,6 @@ export default function CategoryPage() {
                             <Box 
                                 className={styles['product-image']} 
                                 marginBottom={{ xs: '2rem', md: '3.5rem', xl: '0' }} 
-                                /* padding={{ xs: '1rem 0', md: '1.5rem 0', xl: '2rem 3rem' }} */
                                 minWidth={{ xl: '34rem' }}
                                 minHeight={{ xs: '22rem', xl: '35rem' }}
                             >

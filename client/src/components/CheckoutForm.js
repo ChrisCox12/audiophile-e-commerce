@@ -117,8 +117,8 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
             payment: {
                 method: paymentMethod,
                 cardNumber: cardNumber,
-                cardCvc: cvc,
-                cardExpiration: expirationDate
+                cvc: cvc,
+                expirationDate: expirationDate
             },
             orderTotal: (cartTotal + shipping)
         };
