@@ -12,7 +12,7 @@ export default function ProductsPage() {
     
     useEffect(() => {
         if( !localStorage.getItem('audiophile_admin_token') ) navigate('/admin/login');
-    }, [])
+    }, []);
 
 
     if(isFetching) return <Typography>Loading...</Typography>;

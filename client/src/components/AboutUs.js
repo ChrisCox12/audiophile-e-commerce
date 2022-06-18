@@ -13,7 +13,7 @@ export default function AboutUs() {
             gap={{ xs: '2.5rem', md: '3.75rem', xl: '7.5rem' }} 
             height={{ xs: '43.75rem', md: '39.5rem', xl: '36.75rem' }}
         >
-            <Box className={styles['about-us-img']}></Box>
+            <div className={styles['about-us-img']}></div>
 
             <Box className={styles['about-us-text']} textAlign={{ xs: 'center', xl: 'left' }}>
                 <Typography component='h1' variant='h3' textTransform='uppercase' fontWeight={500} marginBottom='2rem'>Bringing you the <span style={{ color: '#D87D4A' }}>best</span> audio gear</Typography>

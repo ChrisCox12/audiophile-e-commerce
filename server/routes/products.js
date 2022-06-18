@@ -1,6 +1,15 @@
 import express from 'express';
-import { getAllProducts, getProductBySlug, createProduct, updateProduct, deleteProduct, getProductsByCategory, getTotalProducts } from '../controllers/products.js';
+import { 
+    getAllProducts, 
+    getProductBySlug, 
+    createProduct, 
+    updateProduct, 
+    deleteProduct, 
+    getProductsByCategory, 
+    getTotalProducts 
+} from '../controllers/products.js';
 import { validateToken } from '../middleware/validateToken.js';
+
 
 const router = express.Router();
 

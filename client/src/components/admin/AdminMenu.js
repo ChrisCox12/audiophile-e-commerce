@@ -1,11 +1,10 @@
-import { Modal, Slide, Box, Typography, Stack } from '@mui/material';
+import { Modal, Slide } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
-import styles from '../../styles/Style.module.css';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-
+import styles from '../../styles/Style.module.css';
 
 
 export default function AdminMenu({ showMenu, closeMenu }) {
@@ -14,7 +13,7 @@ export default function AdminMenu({ showMenu, closeMenu }) {
     return (
         <Modal className='nav-modal' open={showMenu} onClose={closeMenu} sx={{ zIndex: 99, display: { md: 'none' } }}>
             <Slide direction='right' in={showMenu} mountOnEnter unmountOnExit>
-                <Box display='flex' flexDirection='column' width='50%' minWidth='14rem' height='100vh' bgcolor='black' position='absolute' left='0' top='3.5rem' borderTop='2px solid #D87D4A' borderRight='2px solid #D87D4A'>
+                <div className={styles['sidebar-menu-container']}>
                     <Link to='/admin' className={styles['admin-navlinks']} data-selected={location.pathname === '/admin'} onClick={closeMenu}>
                         <HomeRoundedIcon fontSize='large' />
                         <span>Dashboard</span>
@@ -31,7 +30,7 @@ export default function AdminMenu({ showMenu, closeMenu }) {
                         <ShoppingBagIcon fontSize='large' />
                         <span>Orders</span>
                     </Link>
-                </Box>
+                </div>
             </Slide>
         </Modal>
     )

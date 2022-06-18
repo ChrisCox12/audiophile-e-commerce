@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
-import { CssBaseline } from '@mui/material';
-import HomePage from "./pages/Home";
-import CheckoutPage from "./pages/Checkout";
-import ProductPage from "./pages/Product";
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import HomePage from './pages/Home';
+import CheckoutPage from './pages/Checkout';
+import ProductPage from './pages/Product';
 import AdminDashboardPage from './pages/admin/AdminDashboard';
 import AdminLoginPage from './pages/admin/AdminLogin';
 import CategoryPage from './pages/Category';
@@ -23,6 +22,7 @@ import ProductDetailsPage from './pages/admin/ProductDetails';
 function App() {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
+
 
     useEffect(() => {
         if( localStorage.getItem('cart') ) dispatch( setCart( JSON.parse( localStorage.getItem('cart') ) ) );

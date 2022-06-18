@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 
 const orderSchema = mongoose.Schema({
@@ -27,7 +27,8 @@ const orderSchema = mongoose.Schema({
     payment: {
         method: String,
         cardNumber: String,
-        cardPin: String  
+        cvc: String,
+        expirationDate: String 
     },
     delivered: {
         type: String,

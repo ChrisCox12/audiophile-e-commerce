@@ -1,5 +1,15 @@
 import express from 'express';
-import { getAllOrders, getOrderById, getTotalOrders, getTotalSales, createOrder, editOrder, getLatestOrders, getPastYearOrders, editDeliveryStatus } from '../controllers/orders.js';
+import { 
+    getAllOrders, 
+    getOrderById, 
+    getTotalOrders, 
+    getTotalSales, 
+    createOrder, 
+    editOrder, 
+    getLatestOrders, 
+    getPastYearOrders, 
+    editDeliveryStatus 
+} from '../controllers/orders.js';
 import { validateToken } from '../middleware/validateToken.js';
 
 

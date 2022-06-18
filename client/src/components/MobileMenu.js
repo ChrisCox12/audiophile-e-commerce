@@ -9,8 +9,6 @@ import styles from '../styles/Style.module.css';
 
 export default function MobileMenu({ showMenu, closeMenu }) {
 
-    //if(!showMenu) return;
-
     return (
         <Modal open={showMenu} onClose={closeMenu} sx={{ zIndex: 99 }}>
             <Slide direction='right' in={showMenu} mountOnEnter unmountOnExit>
@@ -32,8 +30,8 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>HEADPHONES</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/category/headphones' onClick={closeMenu}>SHOP</Link>
-                                <KeyboardArrowRightIcon />
+                                <Link className={styles['mobile-menu-link']} to='/category/headphones' onClick={closeMenu}>SHOP</Link>
+                                <KeyboardArrowRightIcon sx={{ color: '#D87D4A' }} />
                             </CardActions>
                         </Card>
 
@@ -45,8 +43,8 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>SPEAKERS</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/category/speakers' onClick={closeMenu}>SHOP</Link>
-                                <KeyboardArrowRightIcon />
+                                <Link className={styles['mobile-menu-link']} to='/category/speakers' onClick={closeMenu}>SHOP</Link>
+                                <KeyboardArrowRightIcon sx={{ color: '#D87D4A' }} />
                             </CardActions>
                         </Card>
 
@@ -58,8 +56,8 @@ export default function MobileMenu({ showMenu, closeMenu }) {
                                 <Typography fontWeight={700}>EARPHONES</Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to='/category/earphones' onClick={closeMenu}>SHOP</Link>
-                                <KeyboardArrowRightIcon />
+                                <Link className={styles['mobile-menu-link']} to='/category/earphones' onClick={closeMenu}>SHOP</Link>
+                                <KeyboardArrowRightIcon sx={{ color: '#D87D4A' }} />
                             </CardActions>
                         </Card>
                     </Stack>

@@ -7,8 +7,6 @@ import moment from 'moment';
 
 export default function BarChart({ pastYearOrders }) {
     const Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    //console.log('index of current month: ', Months.indexOf(moment(Date.now()).format('MMMM')))
     const currentMonthIndex = Months.indexOf(moment(Date.now()).format('MMMM'));
     const timeline = [];
     const profits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

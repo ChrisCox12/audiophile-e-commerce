@@ -8,7 +8,6 @@ import axiosInstance from '../../utils/axios';
 import styles from '../../styles/Style.module.css';
 
 
-
 export default function OrderDetailsPage() {
     const { orderId } = useParams();
     const { data: order, isFetching } = useGetOrderByIdQuery(orderId);
@@ -21,7 +20,7 @@ export default function OrderDetailsPage() {
             setDeliveryStatus(order.order.delivered);
             setBaseStatus(order.order.delivered);
         }
-    }, [order, isFetching])
+    }, [order, isFetching]);
 
 
     async function handleClick(e) {
@@ -46,7 +45,7 @@ export default function OrderDetailsPage() {
     if(isFetching) return <Typography>Loading...</Typography>;
 
     return (
-        <Box padding={{ xs: '1.5rem' }} bgcolor='#E1E1E1' sx={{ width: '100%', overflowY: 'scroll' }}>
+        <Box padding={{ xs: '1.5rem' }} bgcolor='#E1E1E1' sx={{ width: '100%', overflowY: 'scroll', height: '100%' }}>
             <Link className={styles['back-button-alt']} to='/admin/orders'>
                 <ArrowBackIosNewRoundedIcon />
                 <span>Go Back</span>

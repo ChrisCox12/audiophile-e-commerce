@@ -1,5 +1,5 @@
-import Product from "../models/product.js";
-import uploadImage from "../utils/uploadImage.js";
+import Product from '../models/product.js';
+import uploadImage from '../utils/uploadImage.js';
 
 
 export async function getAllProducts(req, res) {
@@ -94,7 +94,6 @@ export async function createProduct(req, res) {
         };
 
         const product = new Product(toSave);
-        //const product = new Product(req.body);
 
         await product.save();
 
@@ -109,8 +108,6 @@ export async function createProduct(req, res) {
 
 export async function updateProduct(req, res) {
     const { id } = req.params;
-
-    //console.log(req.body)
 
     try {
         const product = await Product.findById(id);

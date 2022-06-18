@@ -25,6 +25,6 @@ export async function validateToken(req, res, next) {
             
             req.admin = admin;
             next();
-        })
+        });
     }
 }

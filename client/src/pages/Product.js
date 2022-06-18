@@ -8,11 +8,9 @@ import CategoryCards from '../components/CategoryCards';
 import AboutUs from '../components/AboutUs';
 import { useGetProductQuery } from '../redux/productApi';
 import { addItem } from '../redux/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import millify from 'millify';
 import styles from '../styles/Style.module.css';
-
-
 
 
 export default function ProductPage() {
@@ -62,9 +60,9 @@ export default function ProductPage() {
                     gap={{ xs: '2rem', md: '4rem', xl: '7.5rem' }} 
                     marginBottom={{ xs: '5.5rem', md: '7.5rem', xl: '10rem' }}
                 >
-                    <Box className={styles['product-image']}>
+                    <div className={styles['product-image']}>
                         <AdvancedImage cldImg={cld.image(data.product.image)} />
-                    </Box>
+                    </div>
 
                     <div>
                         {data.product.new && <Typography className={styles['new-product']} marginBottom={{ xs: '1.5rem', md: '1rem' }}>NEW PRODUCT</Typography>}
@@ -128,7 +126,7 @@ export default function ProductPage() {
                     <AdvancedImage className={styles['gallery-image']} cldImg={cld.image(data.product.gallery.third)} />
                 </div>
 
-                <Box className='product-suggestions'></Box>
+                <div className='product-suggestions'></div>
 
                 <CategoryCards />
 

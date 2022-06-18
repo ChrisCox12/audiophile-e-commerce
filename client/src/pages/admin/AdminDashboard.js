@@ -7,7 +7,6 @@ import { useGetTotalSalesQuery, useGetTotalOrdersQuery, useGetPastYearOrdersQuer
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import InventoryIcon from '@mui/icons-material/Inventory';
-
 import OrdersTable from '../../components/OrdersTable';
 import BarChart from '../../components/BarChart';
 
@@ -23,37 +22,39 @@ export default function AdminDashboardPage() {
 
     useEffect(() => {
         if( !localStorage.getItem('audiophile_admin_token') ) navigate('/admin/login');
-    }, [])
+    }, []);
 
 
     if(fetchingLatestOrders && fetchingPastOrders && fetchingSales && fetchingProducts && fetchingTotalOrders) return <Typography>Loading...</Typography>;
 
     return (
-        <Box width='100%' overflow='scroll' bgcolor='#E1E1E1' padding={{ xs: '1.5rem', md: '2rem'}}>
+        <Box width='100%' bgcolor='#E1E1E1' padding={{ xs: '1.5rem', md: '2rem'}} sx={{ overflowY: 'scroll' }}>
             <Typography className={styles['page-header']} component='h1' variant='h4'>Admin Dashboard</Typography>
 
             <Box className={styles['summary-stats']} display='flex' flexDirection={{ xs: 'column', md: 'row' }} gap='1rem' alignItems='center'>
-                <Box className='total-sales'>
+                <div className='total-sales'>
                     <MonetizationOnIcon fontSize='large' sx={{ color: '#D87D4A' }} />
                     <div>
                         <Typography>Total Sales</Typography>
                         <span>$ {(totalSales?.totalSales)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
-                </Box>
-                <Box className='total-orders'>
+                </div>
+
+                <div className='total-orders'>
                     <ShoppingBagIcon fontSize='large' sx={{ color: '#D87D4A' }} />
                     <div>
                         <Typography>Total Orders</Typography>
                         <span>{(totalOrders?.totalOrders)?.toLocaleString()}</span>
                     </div>
-                </Box>
-                <Box className='total-products'>
+                </div>
+                
+                <div className='total-products'>
                     <InventoryIcon fontSize='large' sx={{ color: '#D87D4A' }} />
                     <div>
                         <Typography>Total Products</Typography>
                         <span>{(totalProducts?.totalProducts)?.toLocaleString()}</span>
                     </div>
-                </Box>
+                </div>
             </Box>
 
             <BarChart pastYearOrders={pastYearOrders?.pastYearOrders} />

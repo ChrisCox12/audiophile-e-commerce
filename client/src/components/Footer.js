@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Stack } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 import logo from '../assets/audiophile 2.svg';
 import FacebookIcon from '@mui/icons-material/Facebook';

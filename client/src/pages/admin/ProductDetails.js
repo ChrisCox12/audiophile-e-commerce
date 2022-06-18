@@ -30,7 +30,7 @@ export default function ProductDetailsPage() {
     
     useEffect(() => {
         if( !localStorage.getItem('audiophile_admin_token') ) navigate('/admin/login');
-    }, [])
+    }, []);
 
     useEffect(() => {
         if(!isFetching) {
@@ -47,7 +47,7 @@ export default function ProductDetailsPage() {
             setGallerySecond(product.product.gallery.second);
             setGalleryThird(product.product.gallery.third);
         }
-    }, [product, isFetching])
+    }, [product, isFetching]);
 
     
     function handleNameChange(e) {
@@ -191,22 +191,22 @@ export default function ProductDetailsPage() {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Typography fontWeight={500}>Category</Typography>
-                            <Box marginLeft='1.5rem'>
+                            <div style={{ marginLeft: '1.5rem' }}>
                                 <RadioGroup name='category-radio-buttons-group' value={category} onChange={(e) => setCategory(e.target.value)}>
                                     <FormControlLabel value='earphones' control={<Radio />} label='Earphones' />
                                     <FormControlLabel value='headphones' control={<Radio />} label='Headphones' />
                                     <FormControlLabel value='speakers' control={<Radio />} label='Speakers' />
                                 </RadioGroup>
-                            </Box>
+                            </div>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Typography fontWeight={500}>New Product?</Typography>
-                            <Box marginLeft='1.5rem'>
+                            <div style={{ marginLeft: '1.5rem' }}>
                                 <RadioGroup name='new-radio-buttons-group' value={isNewProduct} onChange={(e) => setIsNewProduct(e.target.value)}>
                                     <FormControlLabel value={true} control={<Radio />} label='Yes' />
                                     <FormControlLabel value={false} control={<Radio />} label='No' />
                                 </RadioGroup>
-                            </Box>
+                            </div>
                         </Grid>
                         <Grid item xs={12} display='flex' flexDirection='column' gap='0.5rem'>
                             <TextField 
@@ -244,7 +244,7 @@ export default function ProductDetailsPage() {
                             <Typography marginBottom='0.5rem' fontWeight={500}>Items Included:</Typography>
                             
                             {includes.map((item, index) => (
-                                <Box display='flex' gap='1.5rem' alignItems='center' marginBottom='1rem' key={index}>
+                                <div key={index} style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1rem' }}>
                                     <div>
                                         <TextField 
                                             id={`item-name-${index}`} 
@@ -266,7 +266,7 @@ export default function ProductDetailsPage() {
                                     <IconButton type='button' onClick={(e) => handleRemoveItem(e, index)}>
                                         <CloseRoundedIcon fontSize='medium' sx={{ color: 'red' }} />
                                     </IconButton>
-                                </Box>
+                                </div>
                             ))}
 
                             <Button className={styles['outlined-button']} type='button' variant='outlined' onClick={handleAddItem}>Add Item</Button>

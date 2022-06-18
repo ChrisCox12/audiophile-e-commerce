@@ -14,7 +14,6 @@ export default function CategoryPage() {
     const { category } = useParams();
     const { data, isFetching } = useGetProductsByCategoryQuery(category);
     
-    //console.log(data)
 
     if(isFetching) return <Typography>Loading...</Typography>;
 

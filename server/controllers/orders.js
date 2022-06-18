@@ -1,4 +1,4 @@
-import Order from "../models/order.js";
+import Order from '../models/order.js';
 import moment from 'moment';
 
 
@@ -82,8 +82,6 @@ export async function getTotalOrders(req, res) {
 export async function getLatestOrders(req, res) {
     const { admin } = req;
 
-    //console.log(admin)
-
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
 
@@ -106,11 +104,9 @@ export async function getPastYearOrders(req, res) {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
 
         const currentMonth = moment(Date.now()).format('M');
-        //const currentMonth = 11;
         const currentYear = moment(Date.now()).format('YYYY');
         const pastYear = currentYear - 1;
         const pastMonth = Number(currentMonth) === 12 ? 1 : Number(currentMonth) + 1;
-        //console.log(new Date(`${pastYear}-${pastMonth}-01`))
 
         //  .find( {FILTER}, {PROJECTION} )
         const orders = await Order.find(
@@ -126,7 +122,6 @@ export async function getPastYearOrders(req, res) {
         if(!orders) return res.json({ success: false, msg: 'Could not find any orders' });
 
         res.json({ success: true, msg: 'Successfully retrieved orders', pastYearOrders: orders });
-        //res.json({ msg:'lol' })
     } 
     catch(error) {
         console.log(error);
@@ -182,12 +177,10 @@ export async function editDeliveryStatus(req, res) {
 
         if(!order) return res.json({ success: false, msg: 'Could not find that order' });
 
-        //order.delivered = 'Pending'
         order.delivered = status;
 
         await order.save();
 
-        //console.log(status)
         res.json({ success: true, msg: 'Successfully updated order' });
     } 
     catch(error) {

@@ -10,7 +10,6 @@ import adminRoutes from './routes/admin.js';
 
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 const PORT = process.env.PORT || 8000;
-
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));

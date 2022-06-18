@@ -1,15 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-//const baseUrl = 'http://localhost:8000';
 const baseUrl = process.env.REACT_APP_API_URL;
-//let headers = {};
-
-//if( localStorage.getItem('audiophile_admin_token') ) headers = { authorization: `Bearer ${localStorage.getItem('audiophile_admin_token')}` };
-
-
-//const createRequest = (url) => ({ url, headers });
 const createRequest = (url) => ({ url });
+
 
 export const orderApi = createApi({
     reducerPath: 'orderApi',

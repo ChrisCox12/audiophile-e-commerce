@@ -1,10 +1,8 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import AboutUs from "../components/AboutUs";
-import CategoryCards from "../components/CategoryCards";
+import { Box, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import AboutUs from '../components/AboutUs';
+import CategoryCards from '../components/CategoryCards';
 import styles from '../styles/Style.module.css';
-
-
 
 
 export default function HomePage() {
@@ -27,7 +25,7 @@ export default function HomePage() {
                         height={{ xs: '37.5rem', md: '45rem', xl: '35rem' }} 
                         padding={{ xs: '3.5rem 1.5rem', md: '3.5rem 10.5rem', xl: '6rem 6rem 0 7.5rem' }}
                     >
-                        <Box className={styles['showcase-a-img']} width='100%' height='100%'></Box>
+                        <div className={styles['showcase-a-img']}></div>
 
                         <Box textAlign={{ xs: 'center', xl: 'left' }} width='100%'  height='100%'>
                             <Typography component='h1' variant='h3' fontWeight={700} letterSpacing='2px' marginBottom='1.5rem'>ZX9 <br/> SPEAKER</Typography>
@@ -54,7 +52,7 @@ export default function HomePage() {
                         gap={{ xs: '1.5rem', md: '1rem', xl: '2rem' }}
                         height={{ xs: '26.5rem', md: '20rem' }} 
                     >
-                        <Box className={styles['showcase-c-img']} height='100%' width='100%'></Box>
+                        <div className={styles['showcase-c-img']}></div>
 
                         <Box className={styles['showcase-c-link-container']} paddingLeft={{ xs: '1.5rem', md: '2.5rem', xl: '6rem' }}>
                             <Typography component='h2' variant='h5' fontWeight={600} letterSpacing='2px'>YX1 EARPHONES</Typography>

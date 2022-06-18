@@ -1,32 +1,21 @@
-import { Box, Typography, AppBar, Toolbar, IconButton, Menu, MenuItem, Stack, Slide, Collapse } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import AdminMenu from './AdminMenu';
-import styles from '../../styles/Style.module.css';
 import logo from '../../assets/audiophile 2.svg';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-
-
+import styles from '../../styles/Style.module.css';
 
 
 export default function AdminNavbar() {
     const [showMenu, setShowMenu] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
     const location = useLocation();
 
-
-    function handleOpen(e) {
-        setAnchorEl(e.currentTarget);
-    }
-
-    function handleClose() {
-        setAnchorEl(null);
-    }
 
     function handleCloseMobileMenu() {
         setShowMenu(false);
@@ -34,19 +23,37 @@ export default function AdminNavbar() {
 
 
     return (
-        <AppBar className='admin-navbar' position='static' sx={{ height: { xs: '5.5rem', md: '100vh' }, width: { md: '20rem' }, flexShrink: 'unset', borderRight: { md: '2px solid #D87D4A' } }}>
+        <AppBar 
+            className='admin-navbar' 
+            position='static' 
+            sx={{ 
+                minHeight: '5.5rem', 
+                height: { md: '100vh' }, 
+                width: { md: '20rem' }, 
+                flexShrink: 'unset', 
+                borderRight: { md: '2px solid #D87D4A' } 
+            }}
+        >
             <Toolbar
                 sx={{
                     height: '100%',
                     display: 'flex',
                     padding: { md: '0' },
                     flexDirection: { md: 'column' },
-                    alignItems: {xs: 'center', md: 'flex-start'},
+                    alignItems: { xs: 'center', md: 'flex-start' },
                     bgcolor: 'black',
                     zIndex: 100
                 }}
             >
-                <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between' padding={{ md: '1.5rem 1.5rem 2rem' }} width={{ md: '100%' }} gap='1rem'>
+                <Box 
+                    display='flex' 
+                    flexDirection='row' 
+                    alignItems='center' 
+                    justifyContent='space-between' 
+                    padding={{ md: '1.5rem 1.5rem 2rem' }} 
+                    width={{ md: '100%' }} 
+                    gap='1rem'
+                >
                     <IconButton sx={{ display: { md: 'none' }, color: 'white' }} onClick={() => setShowMenu(!showMenu)}>
                         <MenuIcon />
                     </IconButton>

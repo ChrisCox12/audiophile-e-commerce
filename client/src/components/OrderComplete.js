@@ -1,21 +1,20 @@
-import { Modal, Box, Typography, Stack, Card, CardContent, CardActions, Dialog, DialogActions, DialogTitle, DialogContent, Button } from "@mui/material";
+import { Box, Typography, Dialog, Button } from '@mui/material';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import cld from "../utils/cld";
-import { AdvancedImage } from "@cloudinary/react";
-import { useDispatch, useSelector } from "react-redux";
-import { emptyCart } from "../redux/cartSlice";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { AdvancedImage } from '@cloudinary/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { emptyCart } from '../redux/cartSlice';
+import cld from '../utils/cld';
 import styles from '../styles/Style.module.css';
 
 
-
-
-export default function OrderCompleteModal({ isComplete, handleClose, cartTotal }) {
+export default function OrderCompleteModal({ isComplete, handleClose, cartTotal, shipping }) {
     const [showMore, setShowMore] = useState(false);
     const cart = useSelector(state => state.cart)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
 
     function closeModal() {
         handleClose();
@@ -32,13 +31,13 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal 
                 <Typography sx={{ opacity: 0.7 }}>You will be receiving an email shortly</Typography>
                 
                 <Box display='flex' flexDirection={{ xs: 'column', md: 'row' }} borderRadius='7px' overflow='hidden'>
-                    <Box className='order-items' bgcolor='#F1F1F1' padding='1.5rem'>
+                    <div className={styles['order-items']}>
                         {showMore ?
                             (
                                 <>
                                     {cart.map(item => (
-                                        <Box className={styles['order-item']} key={item.slug}>
-                                            <Box display='flex' gap='1rem' alignItems='center'>
+                                        <div className={styles['order-item']} key={item.slug}>
+                                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                                 <div className={styles['order-item-image']}>
                                                     <AdvancedImage cldImg={cld.image(item.image)} />
                                                 </div>
@@ -46,9 +45,9 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal 
                                                     <Typography className={styles['item-name']}>{item.name}</Typography>
                                                     <Typography className={styles['item-price']}>$ {(item.price).toLocaleString()}</Typography>
                                                 </div>
-                                            </Box>
+                                            </div>
                                             <span className={styles['item-quantity']}>x{item.quantity}</span>
-                                        </Box>
+                                        </div>
                                     ))}
             
                                     <div style={{ width: '100%', border: '1px solid black', marginBottom: '0.5rem' }}></div>
@@ -58,8 +57,8 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal 
                             :
                             (
                                 <>
-                                    <Box className={styles['order-item']} key={cart?.at(0)?.slug}>
-                                        <Box display='flex' gap='1rem' alignItems='center'>
+                                    <div className={styles['order-item']} key={cart?.at(0)?.slug}>
+                                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                             <div className={styles['order-item-image']}>
                                                 <AdvancedImage cldImg={cld.image(cart?.at(0)?.image)} />
                                             </div>
@@ -67,9 +66,9 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal 
                                                 <Typography className={styles['item-name']}>{cart?.at(0)?.name}</Typography>
                                                 <Typography className={styles['item-price']}>$ {(cart?.at(0)?.price)?.toLocaleString()}</Typography>
                                             </div>
-                                        </Box>
+                                        </div>
                                         <span className={styles['item-quantity']}>x{cart?.at(0)?.quantity}</span>
-                                    </Box>
+                                    </div>
 
                                     {cart?.length > 1 && 
                                         <>
@@ -81,12 +80,12 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal 
                                 </>
                             )
                         }
-                    </Box>
+                    </div>
 
-                    <Box className='order-total' bgcolor='black' padding='1.5rem'>
+                    <div className={styles['order-total']}>
                         <Typography sx={{ color: 'white', opacity: 0.6 }}>GRAND TOTAL</Typography>
-                        <Typography sx={{ color: 'white' }}>$ {cartTotal.toLocaleString()}</Typography>
-                    </Box>
+                        <Typography sx={{ color: 'white' }}>$ {(cartTotal + shipping).toLocaleString()}</Typography>
+                    </div>
                 </Box>
                 
                 <Button onClick={closeModal} sx={{ bgcolor: '#D87D4A', color: 'white', letterSpacing: '1px', padding: '1rem 0', ':hover': { bgcolor: '#FBAF85' } }}>BACK TO HOME</Button>

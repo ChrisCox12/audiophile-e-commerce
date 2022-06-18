@@ -4,9 +4,6 @@ import AdminNavbar from './AdminNavbar';
 import styles from '../../styles/Style.module.css';
 
 
-
-
-
 export default function AdminLayout() {
     return (
         <Box className={styles.layout} flexDirection={{ xs: 'column', md: 'row' }}>

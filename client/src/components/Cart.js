@@ -2,17 +2,17 @@ import { Slide, Box, Modal, Typography, Stack, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AdvancedImage } from '@cloudinary/react';
-import cld from '../utils/cld';
-import styles from '../styles/Style.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyCart, incrementItem, decrementItem, removeItem } from '../redux/cartSlice';
+import cld from '../utils/cld';
+import styles from '../styles/Style.module.css';
 
 
 export default function Cart({ showCart, closeCart }) {
     const [total, setTotal] = useState(0);
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
-    //if(!showCart) return;
+
 
     useEffect(() => {
         let t = 0;
@@ -62,33 +62,33 @@ export default function Cart({ showCart, closeCart }) {
                     }}
                 >
                     <Stack spacing={4}>
-                        <Box display='flex' alignItems='center' justifyContent='space-between'>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Typography fontWeight={700}>CART ({cart.length})</Typography>
                             <Button className={styles.removeAllButton} onClick={handleEmptyCart}>Remove all</Button>
-                        </Box>
+                        </div>
 
                         {cart.map(item => (
-                            <Box display='flex' alignItems='center' justifyContent='space-between' key={item.slug}>
-                                <Box display='flex' alignItems='center' gap='1rem'>
+                            <div key={item.slug} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                     <AdvancedImage cldImg={cld.image(item.image)} style={{ width: '4rem', height: '4rem', backgroundColor: '#F1F1F1', borderRadius: '7px', padding: '0.75rem' }} />
                                     <div>
                                         <Typography fontWeight={700}>{item.name}</Typography>
                                         <Typography fontWeight={600} sx={{ opacity: 0.7 }}>$ {(item.price).toLocaleString()}</Typography>
                                     </div>
-                                </Box>
+                                </div>
 
-                                <Box className={styles['item-quantity-update-box']}>
+                                <div className={styles['item-quantity-update-box']}>
                                     <Button className={styles['cart-quantity-button']} onClick={() => updateItem('decrement', item)}>-</Button>
                                     {item.quantity}
                                     <Button className={styles['cart-quantity-button']} onClick={() => updateItem('increment', item)}>+</Button>
-                                </Box>
-                            </Box>
+                                </div>
+                            </div>
                         ))}
 
-                        <Box className={styles['cart-total-box']} display='flex' alignItems='center' justifyContent='space-between'>
+                        <div className={styles['cart-total-box']}>
                             <Typography>TOTAL</Typography>
                             <span>$ {total.toLocaleString()}</span>
-                        </Box>
+                        </div>
 
                         <Link className={styles['cart-checkout-button']} to='/checkout' onClick={closeCart}>CHECKOUT</Link>
                     </Stack>

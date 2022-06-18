@@ -13,13 +13,13 @@ export default function OrdersPage() {
     
     useEffect(() => {
         if(!localStorage.getItem('audiophile_admin_token')) navigate('/admin/login');
-    }, [])
+    }, []);
 
 
     if(isFetching) return <Typography>Loading...</Typography>;
 
     return (
-        <Box width='100%' overflow='scroll' bgcolor='#E1E1E1' padding={{ xs: '1.5rem', md: '2rem'}}>
+        <Box width='100%' bgcolor='#E1E1E1' padding={{ xs: '1.5rem', md: '2rem'}} sx={{ overflowY: 'scroll' }}>
             <Typography className={styles['page-header']} component='h1' variant='h4'>Orders</Typography>
 
             <OrdersTable orders={orders?.orders} />

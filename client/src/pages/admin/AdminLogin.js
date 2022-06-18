@@ -1,7 +1,6 @@
 import { Box, Typography, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import styles from '../../styles/Style.module.css';
 import axiosInstance from '../../utils/axios';
 
 
@@ -24,8 +23,8 @@ export default function AdminLoginPage() {
             const response = await axiosInstance.post('admin/login', toSubmit);
 
             if(response.data.success) {
-                //console.log(response)
                 localStorage.setItem('audiophile_admin_token', response.data.adminToken);
+
                 navigate('/admin');
             }
             else {
@@ -45,10 +44,24 @@ export default function AdminLoginPage() {
                 
                 <form onSubmit={handleSubmit} style={{ width: '15rem' }}>
                     <Box display='flex' flexDirection='column' gap='0.5rem' marginBottom='1rem'>
-                        <TextField label='Username' id='username' onChange={(e) => setUsername(e.target.value)} required fullWidth helperText='Username: admin' />
+                        <TextField 
+                            label='Username' 
+                            id='username' 
+                            required 
+                            fullWidth 
+                            helperText='Username: admin' 
+                            onChange={(e) => setUsername(e.target.value)} 
+                        />
                     </Box>
                     <Box display='flex' flexDirection='column' gap='0.5rem' marginBottom='1.5rem'>
-                        <TextField label='Password' id='password' onChange={(e) => setPassword(e.target.value)} required fullWidth helperText='Password: admin' />
+                        <TextField 
+                            label='Password' 
+                            id='password' 
+                            required 
+                            fullWidth 
+                            helperText='Password: admin' 
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
                     </Box>
 
                     <Button type='submit' variant='contained' fullWidth>Login</Button>

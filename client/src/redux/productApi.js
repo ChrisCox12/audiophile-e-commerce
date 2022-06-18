@@ -1,9 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-//const baseUrl = 'http://localhost:8000';
 const baseUrl = process.env.REACT_APP_API_URL;
-
 const createRequest = (url) => ({ url });
 
 
@@ -25,7 +23,6 @@ export const productApi = createApi({
         })
     })
 });
-
 
 
 export const { 

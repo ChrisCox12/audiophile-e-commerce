@@ -7,9 +7,6 @@ import EarphonesPreview from '../assets/earphones-category-preview.svg';
 import styles from '../styles/Style.module.css';
 
 
-
-
-
 export default function CategoryCards() {
 
     return (
