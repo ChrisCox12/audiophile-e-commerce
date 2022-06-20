@@ -62,7 +62,7 @@ export default function Footer() {
 
                 <div className='attribution' style={{ color: 'white', textAlign: 'center', marginTop: '1.5rem' }}>
                     Challenge by <a href='https://www.frontendmentor.io?ref=challenge' target='_blank'>Frontend Mentor</a>. 
-                    Coded by <a href='#'>Your Name Here</a>.
+                    Coded by <a href='#'>Christopher Cox</a>.
                 </div>
             </div>
         </Box>
