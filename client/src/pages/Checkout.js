@@ -10,7 +10,7 @@ import styles from '../styles/Style.module.css';
 export default function CheckoutPage() {
     const [total, setTotal] = useState(0);
     const [orderComplete, setOrderComplete] = useState(false);
-    const shipping = 15;
+    const shipping = 50;
     const cart = useSelector(state => state.cart);
     
 

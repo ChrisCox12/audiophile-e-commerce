@@ -731,6 +731,7 @@
     align-items: center;
     gap: 0.25rem;
     font-weight: 500;
+    width: fit-content;
 }
 
 .back-button-alt:hover {
@@ -773,6 +774,17 @@
     background-color: #FBAF85 !important;
 }
 
+.delete-button {
+    background-color: red !important;
+    color: white !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+.delete-button:hover {
+    background-color: tomato !important;
+}
+
 .new-product-basic-details-grid {
     margin-bottom: 1rem;
 }
@@ -790,8 +802,13 @@
 .new-product-actions {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     margin-top: 1.5rem;
+}
+
+.new-product-actions button {
+    width: 10rem;
 }
 
 .new-product-images-grid {

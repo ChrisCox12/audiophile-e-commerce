@@ -1,24 +1,11 @@
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, MenuItem, Menu } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import moment from 'moment';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Style.module.css';
 
 
 export default function OrdersTable({ orders }) {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
     const navigate = useNavigate();
-
-    
-    function handleClick(e) {
-        setAnchorEl(e.currentTarget);
-    }
-
-    function handleClose() {
-        setAnchorEl(null);
-    }
 
 
     return (
@@ -47,14 +34,7 @@ export default function OrdersTable({ orders }) {
                             <TableCell>{order.customer.name}</TableCell>
                             <TableCell>{order.customer.email}</TableCell>
                             <TableCell>
-                                <IconButton onClick={handleClick}>
-                                    <MoreHorizIcon fontSize='medium' />
-                                </IconButton>
-
-                                <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                                    <MenuItem onClick={() => navigate(`/admin/order/${order._id}`)}>Edit</MenuItem>
-                                    <MenuItem>Delete</MenuItem>
-                                </Menu>
+                                <Button variant='outlined' onClick={() => navigate(`/admin/order/${order._id}`)}>Edit</Button>
                             </TableCell>
                         </TableRow>
                     ))}

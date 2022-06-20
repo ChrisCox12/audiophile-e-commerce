@@ -73,7 +73,7 @@ export default function Cart({ showCart, closeCart }) {
                                     <AdvancedImage cldImg={cld.image(item.image)} style={{ width: '4rem', height: '4rem', backgroundColor: '#F1F1F1', borderRadius: '7px', padding: '0.75rem' }} />
                                     <div>
                                         <Typography fontWeight={700}>{item.name}</Typography>
-                                        <Typography fontWeight={600} sx={{ opacity: 0.7 }}>$ {(item.price).toLocaleString()}</Typography>
+                                        <Typography fontWeight={600} sx={{ opacity: 0.7 }}>$ {(item.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                                     </div>
                                 </div>
 
@@ -87,7 +87,7 @@ export default function Cart({ showCart, closeCart }) {
 
                         <div className={styles['cart-total-box']}>
                             <Typography>TOTAL</Typography>
-                            <span>$ {total.toLocaleString()}</span>
+                            <span>$ {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </div>
 
                         <Link className={styles['cart-checkout-button']} to='/checkout' onClick={closeCart}>CHECKOUT</Link>

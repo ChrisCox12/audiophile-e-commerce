@@ -277,7 +277,7 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
                 <Stack spacing={3}>
                     <div className={styles['summary-info']}>
                         <Typography>TOTAL</Typography>
-                        <span>$ {cartTotal.toLocaleString()}</span>
+                        <span>$ {cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                     <div className={styles['summary-info']}>
                         <Typography>SHIPPING</Typography>
@@ -285,7 +285,7 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
                     </div>
                     <div className={styles['summary-info']}>
                         <Typography>GRAND TOTAL</Typography>
-                        <span>$ {(cartTotal + shipping).toLocaleString()}</span>
+                        <span>$ {(cartTotal + shipping).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                 </Stack>
 

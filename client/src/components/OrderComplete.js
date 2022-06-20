@@ -43,7 +43,7 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal,
                                                 </div>
                                                 <div>
                                                     <Typography className={styles['item-name']}>{item.name}</Typography>
-                                                    <Typography className={styles['item-price']}>$ {(item.price).toLocaleString()}</Typography>
+                                                    <Typography className={styles['item-price']}>$ {(item.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                                                 </div>
                                             </div>
                                             <span className={styles['item-quantity']}>x{item.quantity}</span>
@@ -64,7 +64,7 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal,
                                             </div>
                                             <div>
                                                 <Typography className={styles['item-name']}>{cart?.at(0)?.name}</Typography>
-                                                <Typography className={styles['item-price']}>$ {(cart?.at(0)?.price)?.toLocaleString()}</Typography>
+                                                <Typography className={styles['item-price']}>$ {(cart?.at(0)?.price)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                                             </div>
                                         </div>
                                         <span className={styles['item-quantity']}>x{cart?.at(0)?.quantity}</span>
@@ -84,7 +84,7 @@ export default function OrderCompleteModal({ isComplete, handleClose, cartTotal,
 
                     <div className={styles['order-total']}>
                         <Typography sx={{ color: 'white', opacity: 0.6 }}>GRAND TOTAL</Typography>
-                        <Typography sx={{ color: 'white' }}>$ {(cartTotal + shipping).toLocaleString()}</Typography>
+                        <Typography sx={{ color: 'white' }}>$ {(cartTotal + shipping).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </div>
                 </Box>
                 

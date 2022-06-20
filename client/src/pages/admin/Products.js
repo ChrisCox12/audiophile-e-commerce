@@ -40,7 +40,7 @@ export default function ProductsPage() {
                                 <TableCell>{product.slug}</TableCell>
                                 <TableCell sx={{ textTransform: 'capitalize' }}>{product.category}</TableCell>
                                 <TableCell>{product.new ? 'Yes' : 'No'}</TableCell>
-                                <TableCell>$ {(product.price).toLocaleString()}</TableCell>
+                                <TableCell>$ {(product.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
                                 <TableCell>
                                     <Button variant='outlined' onClick={() => navigate(`/admin/product/${product.slug}`)}>Edit</Button>
                                 </TableCell>

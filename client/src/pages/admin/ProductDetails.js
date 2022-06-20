@@ -118,6 +118,24 @@ export default function ProductDetailsPage() {
         };
     }
 
+    async function handleDelete(e) {
+        e.preventDefault();
+
+        try {
+            const response = await axiosInstance.delete(`products/${product.product._id}`);
+
+            if(response.data.success) {
+                navigate('/admin/products');
+            }
+            else {
+                alert(response.data.msg);
+            }
+        } 
+        catch(error) {
+            console.log(error);    
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -143,8 +161,6 @@ export default function ProductDetailsPage() {
         try {
             const response = await axiosInstance.patch(`products/${product.product._id}`, toSubmit);
 
-            //console.log(response);
-
             if(response.data.success) {
                 navigate('/admin/products');
             }
@@ -161,14 +177,14 @@ export default function ProductDetailsPage() {
     if(isFetching) return <Typography>Loading...</Typography>;
     
     return (
-        <Box width='100%' bgcolor='#E1E1E1' display='flex' justifyContent='center' padding={{ xs: '1.25rem', md: '2rem', lg: '0' }} sx={{ overflowY: 'scroll' }}>
+        <Box width='100%' bgcolor='#E1E1E1' display='flex' justifyContent='center' padding={{ xs: '1.25rem', md: '2rem' }} sx={{ overflowY: 'scroll' }}>
             <div style={{ maxWidth: '50rem', width: '100%' }}>
                 <Link className={styles['back-button-alt']} to='/admin/products'>
                     <ArrowBackIosNewRoundedIcon />
                     <span>Go Back</span>
                 </Link>
                 
-                <Typography className={styles['page-header']} component='h1' variant='h4'>New Product</Typography>
+                <Typography className={styles['page-header']} component='h1' variant='h4'>Product Details</Typography>
                 
                 <form className={styles['new-product-details-form']} onSubmit={handleSubmit}>
                     <Grid className={styles['new-product-basic-details-grid']} container spacing={2}>
@@ -245,24 +261,26 @@ export default function ProductDetailsPage() {
                             
                             {includes.map((item, index) => (
                                 <div key={index} style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1rem' }}>
-                                    <div>
-                                        <TextField 
-                                            id={`item-name-${index}`} 
-                                            label='Item' 
-                                            value={item.item} 
-                                            onChange={(e) => handleIncludesChange(index, 'name', e.target.value)} 
-                                        />
-                                    </div>
-                                    <div>
-                                        <TextField 
-                                            id={`item-quantity-${index}`} 
-                                            label='Quantity' 
-                                            type='number' 
-                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', min: 0 }} 
-                                            value={item.quantity} 
-                                            onChange={(e) => handleIncludesChange(index, 'quantity', e.target.value)} 
-                                        />
-                                    </div>
+                                    <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }} gap={{ xs: '1rem', sm: '1.5rem' }}>
+                                        <div>
+                                            <TextField
+                                                id={`item-name-${index}`}
+                                                label='Item'
+                                                value={item.item}
+                                                onChange={(e) => handleIncludesChange(index, 'name', e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <TextField
+                                                id={`item-quantity-${index}`}
+                                                label='Quantity'
+                                                type='number'
+                                                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', min: 0 }}
+                                                value={item.quantity}
+                                                onChange={(e) => handleIncludesChange(index, 'quantity', e.target.value)}
+                                            />
+                                        </div>
+                                    </Box>
                                     <IconButton type='button' onClick={(e) => handleRemoveItem(e, index)}>
                                         <CloseRoundedIcon fontSize='medium' sx={{ color: 'red' }} />
                                     </IconButton>
@@ -307,9 +325,12 @@ export default function ProductDetailsPage() {
 
                     <Divider />
 
-                    <Box className={styles['new-product-actions']}>
-                        <Button className={styles['text-button']} type='button' variant='text'>Cancel</Button>
-                        <Button className={styles['submit-button']} type='submit' variant='contained'>Submit</Button>
+                    <Box className={styles['new-product-actions']} flexDirection={{ xs: 'column', sm: 'row'}} alignItems='center'>
+                        <Button className={styles['delete-button']} type='button' variant='outlined' onClick={handleDelete}>Delete</Button>
+                        <Box display='flex' alignItems='center' gap='1rem' flexDirection={{ xs: 'column', sm: 'row' }}>
+                            <Button className={styles['text-button']} type='button' variant='text' onClick={() => navigate('/admin/products')}>Cancel</Button>
+                            <Button className={styles['submit-button']} type='submit' variant='contained'>Submit</Button>
+                        </Box>
                     </Box>
                 </form>
             </div>

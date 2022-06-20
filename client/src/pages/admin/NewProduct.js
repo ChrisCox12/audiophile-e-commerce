@@ -133,7 +133,7 @@ export default function NewProductPage() {
 
 
     return (
-        <Box width='100%' bgcolor='#E1E1E1' display='flex' justifyContent='center' padding={{ xs: '1.25rem', md: '2rem', lg: '0' }} sx={{ overflowY: 'scroll' }}>
+        <Box width='100%' bgcolor='#E1E1E1' display='flex' justifyContent='center' padding={{ xs: '1.25rem', md: '2rem' }} sx={{ overflowY: 'scroll' }}>
             <div style={{ maxWidth: '50rem', width: '100%' }}>
                 <Link className={styles['back-button-alt']} to='/admin/orders'>
                     <ArrowBackIosNewRoundedIcon />

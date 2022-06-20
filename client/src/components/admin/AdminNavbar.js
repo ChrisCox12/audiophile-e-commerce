@@ -58,10 +58,8 @@ export default function AdminNavbar() {
                         <MenuIcon />
                     </IconButton>
                     
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <img src={logo} alt='' />
-                        <Link to='/admin'>Admin Dashboard</Link>
-                    </div>
+                    
+                    <img src={logo} alt='Audiophile logo' />
                 </Box>
 
                 <AdminMenu showMenu={showMenu} closeMenu={handleCloseMobileMenu} />
