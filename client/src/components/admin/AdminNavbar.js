@@ -1,6 +1,6 @@
 import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AdminMenu from './AdminMenu';
 import logo from '../../assets/audiophile 2.svg';
@@ -14,10 +14,19 @@ import styles from '../../styles/Style.module.css';
 export default function AdminNavbar() {
     const [showMenu, setShowMenu] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
 
     function handleCloseMobileMenu() {
         setShowMenu(false);
+    }
+
+    function handleLogOut(e) {
+        e.preventDefault();
+
+        localStorage.removeItem('audiophile_admin_token');
+
+        navigate('/admin/login');
     }
 
 
@@ -61,7 +70,7 @@ export default function AdminNavbar() {
                     <img src={logo} alt='Audiophile logo' />
                 </Box>
 
-                <AdminMenu showMenu={showMenu} closeMenu={handleCloseMobileMenu} />
+                <AdminMenu showMenu={showMenu} closeMenu={handleCloseMobileMenu} logout={handleLogOut} />
 
                 <Box display={{ xs:'none', md: 'flex' }} flexDirection='column' width='100%'>
                     <Link to='/admin' className={styles['admin-navlinks']} data-selected={location.pathname === '/admin'}>
@@ -80,7 +89,7 @@ export default function AdminNavbar() {
                         <ShoppingBagIcon fontSize='large' />
                         <span>Orders</span>
                     </Link>
-                    <Button className={styles['admin-navlinks']}>Logout</Button>
+                    <Button className={styles['admin-navlinks']} onClick={handleLogOut}>Logout</Button>
                 </Box>
             </Toolbar>
         </AppBar>

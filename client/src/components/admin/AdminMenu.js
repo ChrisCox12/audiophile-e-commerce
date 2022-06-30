@@ -7,7 +7,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import styles from '../../styles/Style.module.css';
 
 
-export default function AdminMenu({ showMenu, closeMenu }) {
+export default function AdminMenu({ showMenu, closeMenu, logout }) {
     const location = useLocation();
 
     return (
@@ -30,7 +30,7 @@ export default function AdminMenu({ showMenu, closeMenu }) {
                         <ShoppingBagIcon fontSize='large' />
                         <span>Orders</span>
                     </Link>
-                    <Button className={styles['admin-navlinks']}>Logout</Button>
+                    <Button className={styles['admin-navlinks']} onClick={logout}>Logout</Button>
                 </div>
             </Slide>
         </Modal>
