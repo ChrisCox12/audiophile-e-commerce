@@ -81,6 +81,7 @@ export default function AdminLoginPage() {
                         <TextField
                             label='Password'
                             id='password'
+                            type='password'
                             required
                             fullWidth
                             helperText='Password: admin'
