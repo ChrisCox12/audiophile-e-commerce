@@ -30,6 +30,7 @@ export default function AdminMenu({ showMenu, closeMenu }) {
                         <ShoppingBagIcon fontSize='large' />
                         <span>Orders</span>
                     </Link>
+                    <Button className={styles['admin-navlinks']}>Logout</Button>
                 </div>
             </Slide>
         </Modal>

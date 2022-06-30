@@ -80,6 +80,7 @@ export default function AdminNavbar() {
                         <ShoppingBagIcon fontSize='large' />
                         <span>Orders</span>
                     </Link>
+                    <Button className={styles['admin-navlinks']}>Logout</Button>
                 </Box>
             </Toolbar>
         </AppBar>
