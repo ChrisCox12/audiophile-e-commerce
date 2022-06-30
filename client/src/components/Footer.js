@@ -31,6 +31,7 @@ export default function Footer() {
                         <Link to='/category/headphones'>HEADPHONES</Link>
                         <Link to='/category/speakers'>SPEAKERS</Link>
                         <Link to='/category/earphones'>EARPHONES</Link>
+                        <Link to='/admin/login'>ADMIN LOGIN</Link>
                     </Stack>
                 </Box>
 
@@ -54,9 +55,9 @@ export default function Footer() {
                     <Typography>Copyright 2021. All Rights Reserved</Typography>
 
                     <Stack className='footer-socials' spacing={2} direction='row'>
-                        <a href='https://www.facebook.com/' target='_blank' rel='noreferrer'><FacebookIcon sx={{ color: 'white' }} /></a>
-                        <a href='https://twitter.com/' target='_blank' rel='noreferrer'><TwitterIcon sx={{ color: 'white' }} /></a>
-                        <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'><InstagramIcon sx={{ color: 'white' }} /></a>
+                        <a href='https://www.facebook.com/' target='_blank' rel='noreferrer'><FacebookIcon sx={{ color: 'white', ':hover': { color: '#D87D4A' } }} /></a>
+                        <a href='https://twitter.com/' target='_blank' rel='noreferrer'><TwitterIcon sx={{ color: 'white', ':hover': { color: '#D87D4A' } }} /></a>
+                        <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'><InstagramIcon sx={{ color: 'white', ':hover': { color: '#D87D4A' } }} /></a>
                     </Stack>
                 </Box>
 

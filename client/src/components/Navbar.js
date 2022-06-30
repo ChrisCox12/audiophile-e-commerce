@@ -50,6 +50,7 @@ export default function Navbar() {
                     <Link to='/category/headphones'>HEADPHONES</Link>
                     <Link to='/category/speakers'>SPEAKERS</Link>
                     <Link to='/category/earphones'>EARPHONES</Link>
+                    <Link to='/admin/login'>ADMIN LOGIN</Link>
                 </Stack>
 
                 <IconButton sx={{ marginLeft: { sm: 'auto', md: '0' } }} onClick={() => setShowCart(!showCart)}>

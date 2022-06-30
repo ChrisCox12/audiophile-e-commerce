@@ -48,6 +48,11 @@
     font-weight: 700;
 }
 
+.navlinks a:hover,
+.footer-links a:hover {
+    color: #D87D4A;
+}
+
 .footer-container p {
     color: white;
     opacity: 0.6;
