@@ -15,15 +15,16 @@ const orderSchema = mongoose.Schema({
         country: String,
         zip: String
     },
-    cart: [
-        {
-            name: String,
-            slug: String,
-            price: Number,
-            quantity: Number
-        }
-    ],
-    orderTotal: Number,
+    cart: [{
+        name: String,
+        slug: String,
+        price: Number,
+        quantity: Number
+    }],
+    orderTotal: { 
+        type: Number, 
+        default: 0.00 
+    },
     payment: {
         method: String,
         cardNumber: String,

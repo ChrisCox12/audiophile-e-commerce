@@ -16,15 +16,13 @@ const productSchema = mongoose.Schema({
     },
     description: String,
     features: String,
-    includes: [
-        {
-            quantity: {
-                type: Number,
-                default: 1
-            },
-            item: String
-        }
-    ],
+    includes: [{
+        quantity: {
+            type: Number,
+            default: 1
+        },
+        item: String
+    }],
     gallery: {
         first: String,
         second: String,
