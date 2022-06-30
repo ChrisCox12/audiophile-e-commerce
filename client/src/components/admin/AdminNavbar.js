@@ -13,7 +13,6 @@ import styles from '../../styles/Style.module.css';
 
 export default function AdminNavbar() {
     const [showMenu, setShowMenu] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
     const location = useLocation();
 
 

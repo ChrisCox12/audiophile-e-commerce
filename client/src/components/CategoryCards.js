@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, CardContent, CardActions, Stack, Typography } from '@mui/material';
+import { Box, Card, CardMedia, CardContent, CardActions, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { Link } from 'react-router-dom';
 import HeadphonesPreview from '../assets/headphones-category-preview.svg';

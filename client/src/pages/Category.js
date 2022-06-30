@@ -18,7 +18,7 @@ export default function CategoryPage() {
 
     useEffect(() => {
         if(!isFetching) setProducts(data?.products);
-    }, [data]);
+    }, [data, isFetching]);
     
 
     function handleSearchBarInput(e) {

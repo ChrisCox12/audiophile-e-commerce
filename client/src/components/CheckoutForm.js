@@ -226,17 +226,17 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
                                 <div>
                                     <Grid container spacing={2}>
                                         <Grid className={styles['form-input']} item xs={12} md={6}>
-                                            <label>Card Number</label>
+                                            <label htmlFor='card-number'>Card Number</label>
                                             <input type='text' name='card-number' id='card-number' value={cardNumber} onChange={handleCardInput} />
                                             {cardNumberMessage && <div>{cardNumberMessage}</div>}
                                         </Grid>
                                         <Grid className={styles['form-input']} item xs={6} md={3}>
-                                            <label>Expiration</label>
+                                            <label htmlFor='expiration-date'>Expiration (MM/YY)</label>
                                             <input type='text' name='expiration-date' id='expiration-date' value={expirationDate} onChange={handleCardInput} />
                                             {expirationMessage && <div>{expirationMessage}</div>}
                                         </Grid>
                                         <Grid className={styles['form-input']} item xs={6} md={3}>
-                                            <label>CVC</label>
+                                            <label htmlFor='cvc'>CVC</label>
                                             <input type='text' name='cvc' id='cvc' value={cvc} onChange={handleCardInput} />
                                             {cvcMessage && <div>{cvcMessage}</div>}
                                         </Grid>
