@@ -608,16 +608,16 @@
 }
 
 .admin-navlinks {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    color: white;
-    text-decoration: none;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    padding: 1rem 1.5rem !important;
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .admin-navlinks:hover {
-    background-color: #D87D4A;
+    background-color: #D87D4A !important;
 }
 
 .admin-navlinks[data-selected='true'] {
