@@ -1,4 +1,4 @@
-import { Modal, Slide } from '@mui/material';
+import { Button, Modal, Slide } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import InventoryIcon from '@mui/icons-material/Inventory';
