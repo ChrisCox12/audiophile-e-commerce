@@ -25,6 +25,8 @@ export default function ProductDetailsPage() {
     const [galleryFirst, setGalleryFirst] = useState('');
     const [gallerySecond, setGallerySecond] = useState('');
     const [galleryThird, setGalleryThird] = useState('');
+    const [deleteErrorMsg, setDeleteErrorMsg] = useState('');
+    const [submitErrorMsg, setSubmitErrorMsg] = useState('');
     const navigate = useNavigate();
 
     
@@ -128,7 +130,7 @@ export default function ProductDetailsPage() {
                 navigate('/admin/products');
             }
             else {
-                alert(response.data.msg);
+                setDeleteErrorMsg(response.data.msg);
             }
         } 
         catch(error) {
@@ -165,7 +167,7 @@ export default function ProductDetailsPage() {
                 navigate('/admin/products');
             }
             else {
-                alert(response.data.msg);
+                setSubmitErrorMsg(response.data.msg);
             }
         }
         catch(error) {
@@ -187,6 +189,9 @@ export default function ProductDetailsPage() {
                 <Typography className={styles['page-header']} component='h1' variant='h4'>Product Details</Typography>
                 
                 <form className={styles['new-product-details-form']} onSubmit={handleSubmit}>
+                    {submitErrorMsg && <Typography textAlign='center' bgcolor='red' color='white' fontWeight={700} borderRadius='7px' padding='0.5rem'>Submit Error: {submitErrorMsg}</Typography>}
+                    {deleteErrorMsg && <Typography textAlign='center' bgcolor='red' color='white' fontWeight={700} borderRadius='7px' padding='0.5rem'>Delete Error: {deleteErrorMsg}</Typography>}
+                
                     <Grid className={styles['new-product-basic-details-grid']} container spacing={2}>
                         <Grid className='grid-header' item xs={12}>
                             <Typography className={styles['grid-section-head']} component='h2' variant='h5'>Basic Details</Typography>

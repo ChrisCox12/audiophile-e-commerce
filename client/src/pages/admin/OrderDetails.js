@@ -13,6 +13,7 @@ export default function OrderDetailsPage() {
     const { data: order, isFetching } = useGetOrderByIdQuery(orderId);
     const [deliveryStatus, setDeliveryStatus] = useState('');
     const [baseStatus, setBaseStatus] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
 
     useEffect(() => {
@@ -33,7 +34,8 @@ export default function OrderDetailsPage() {
                 setBaseStatus(deliveryStatus);
             }
             else {
-                alert(response.data.msg);
+                //alert(response.data.msg);
+                setErrorMsg(response.data.msg);
             }
         } 
         catch(error) {
@@ -90,6 +92,8 @@ export default function OrderDetailsPage() {
                     <Grid container item xs={12}>
                         <Grid className={styles['grid-section-head']} item xs={12} sm={4}>Status</Grid>
                         <Grid item xs={12} sm={8}>
+                            {errorMsg && <Typography textAlign='center' bgcolor='red' color='white' fontWeight={700} borderRadius='7px' padding='0.5rem'>Error: {errorMsg}</Typography>}
+                            
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <Select value={deliveryStatus} onChange={(e) => setDeliveryStatus(e.target.value)} sx={{ width: '100%' }}>
                                     <MenuItem value='Pending'>Pending</MenuItem>

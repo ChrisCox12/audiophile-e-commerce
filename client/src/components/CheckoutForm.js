@@ -25,6 +25,7 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
     const [expirationDate, setExpirationDate] = useState('');
     const [expirationMessage, setExpirationMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const cart = useSelector(state => state.cart);
     
 
@@ -131,7 +132,7 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
                 completeOrder();
             }
             else {
-                alert(response.data.msg);
+                setErrorMsg(response.data.msg);
             }
         } 
         catch(error) {
@@ -160,6 +161,8 @@ export default function CheckoutForm({ completeOrder, cartTotal, shipping }) {
             <Box className={styles['customer-form']} width={{ xs: '100%', xl: '70%' }} padding={{ xs: '1.5rem 1.5rem 2rem', md: '2rem 1.5rem', lg: '2.5rem', xl: '3.5rem 3rem' }}>
                 <Typography component='h1' variant='h3' fontWeight={700} marginBottom={{ xs: '2rem', md: '2.5rem' }}>CHECKOUT</Typography>
 
+                {errorMsg && <Typography textAlign='center' bgcolor='red' color='white' fontWeight={700} borderRadius='7px' padding='0.5rem'>Error: {errorMsg}</Typography>}
+                
                 <Box marginBottom={{ xs: '2rem', md: '3rem', xl: '4rem' }}>
                     <Typography className={styles['form-section-head']} component='h3' variant='h5'>BILLING DETAILS</Typography>
                     
