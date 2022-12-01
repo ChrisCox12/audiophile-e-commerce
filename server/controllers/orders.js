@@ -3,7 +3,7 @@ import moment from 'moment';
 
 
 export async function getAllOrders(req, res) {
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -22,7 +22,7 @@ export async function getAllOrders(req, res) {
 
 export async function getOrderById(req, res) {
     const { id } = req.params;
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -40,7 +40,7 @@ export async function getOrderById(req, res) {
 }
 
 export async function getTotalSales(req, res) {
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -62,7 +62,7 @@ export async function getTotalSales(req, res) {
 }
 
 export async function getTotalOrders(req, res) {
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -80,7 +80,7 @@ export async function getTotalOrders(req, res) {
 }
 
 export async function getLatestOrders(req, res) {
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -98,7 +98,7 @@ export async function getLatestOrders(req, res) {
 }
 
 export async function getPastYearOrders(req, res) {
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -146,7 +146,7 @@ export async function createOrder(req, res) {
 
 export async function editOrder(req, res) {
     const { id } = req.params;
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });
@@ -168,7 +168,7 @@ export async function editOrder(req, res) {
 export async function editDeliveryStatus(req, res) {
     const { id } = req.params;
     const { status } = req.body;
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
 
     try {
         if(!admin) return res.json({ success: false, msg: 'Access denied; Could not validate credentials' });

@@ -66,7 +66,7 @@ export async function createProduct(req, res) {
     const productInfo = req.body;
     const image = productInfo.image;
     const galleryImages = productInfo.gallery;
-    const { admin } = req;
+    const { admin } = req; // pull admin object attached to request from middleware
     
     try {
         if(!admin) return res.json({ success: false, msg: 'Failed to create product; Could not verify your credentials' });
